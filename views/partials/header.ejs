@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+
+  <!-- CSS Section -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='stylesheets/style.css' />
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" rel="home" href="#" title="Massive Survey">
+            <img style="max-width:100px; margin-top: -7px;" 
+                 src="http://i359.photobucket.com/albums/oo33/Chang_Liu/logo_zpslzwsatdq.jpg" alt="Massive Survey">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if(title == "Home" ) { %>
+            <li class="active">
+          <% } else { %>
+          <li>
+            <% } %>
+            <a href="/">Home</a></li>
+          <li role="separator" class="divider"></li>
+          <% if (displayName) { %>
+            <% if(title == "Users" ) { %>
+            <li class="active">
+              <% } else { %>
+            <li>
+              <% } %>
+              <a href="/users">Users</a></li>
+            <li class="navbar-text">Hello,
+              <%= displayName %>
+            </li>
+            <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+              <% if(title == "Register" ) { %>
+            <li class="active">
+            <% } else { %>
+            <li>
+            <% } %>
+                <a href="/register">Register</a></li>
+              <% if(title == "Login" ) { %>
+            <li class="active">
+            <% } else { %>
+            <li>
+            <% } %>
+                <a href="/login">Login</a></li>
+              <% } %>
+            <li><a href="/addSurvey">Add</a></li>
+        </ul> <!-- nav navbar-nav navbar-right -->
+      </div> <!-- collapse navbar-collapse -->
+    </div> <!-- container-fluid -->
+  </nav> <!-- navbar navbar-inverse -->

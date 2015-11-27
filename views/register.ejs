@@ -1,0 +1,33 @@
+<% include partials/header.ejs %>	
+	<!-- Registration form  -->
+	<main class="container centerize">
+	<!-- Display flash messages  -->
+	<% if (messages.length > 0) { %>
+        <div class="alert alert-danger"><%= messages %></div>
+      <% } %>
+		<h1>User Registration</h1>
+		<div class="row">
+			<form role="form" method="post">
+				<div class="form-group col-md-4 col-md-offset-4">
+					<label for="email">Email: *</label>
+					<input name="email" type="email" class="form-control" required autofocus />
+				</div>
+				<div class="form-group col-md-4 col-md-offset-4">
+					<label for="username">Username: *</label>
+					<input name="username" type="text" class="form-control" required />
+				</div>
+				<div class="form-group col-md-4 col-md-offset-4">
+					<label for="password">Password: *</label>
+					<input name="password" type="password" class="form-control" required />
+				</div>
+				<div class="form-group col-md-4 col-md-offset-4">
+					<label for="displayName">Display Name: *</label>
+					<input name="displayName" type="text" class="form-control" required />
+				</div>
+				<div class="form-group col-md-12" align="center">
+					<input type="submit" class="btn btn-success" value="Submit"/>
+				</div>
+			</form
+		</div>
+	</main>
+<% include partials/footer.ejs %>
