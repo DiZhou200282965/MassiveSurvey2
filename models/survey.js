@@ -7,21 +7,25 @@ var Schema = mongoose.Schema;
 
 // Define user Schema
 var SurveySchema = new Schema({
-    userId: String,
-    multipleChoice: 
-        {
-            
-        },
-    singleChoice:
-        {
+    //userId: String,
+   multipleChoice:
+        {          
+           question: [{
+                title: String,
+                options: [String]
+                     }]
+           
+        },   
+    //tureFalse:
+    //    {
 
-        },
-    created: Number,
-    updated: Number
+    //    },
+    //created: Number,
+    //updated: Number
 }, {
     collection: 'Survey'
 });
 
 
 
-module.exports = mongoose.model('Survey', UserSchema);
+module.exports = mongoose.model('Survey', SurveySchema);
