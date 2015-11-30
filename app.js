@@ -19,7 +19,7 @@ mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Failed..');
 });
 
-var addSurvey = require('./server/routes/addSurvey.js');
+var surveys = require('./server/routes/surveys.js');
 var routes = require('./server/routes/index');
 var users = require('./server/routes/users');
 // var businesscontacts = require(('./routes/businesscontacts'));
@@ -52,7 +52,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/addSurvey', addSurvey);
+app.use('/surveys', surveys);
 
 // app.use('/businesscontacts', businesscontacts);
 

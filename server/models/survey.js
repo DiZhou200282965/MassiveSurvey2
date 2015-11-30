@@ -1,29 +1,39 @@
 ﻿// Import mongoose 
 var mongoose = require('mongoose');
 
-
 // Alias for mongoose.Schema
 var Schema = mongoose.Schema;
 
-// Define user Schema
-var SurveySchema = new Schema({
-    //userId: String,
-   multipleChoice:
-        {          
-           question: [{
-                title: String,
-                options: [String]
-                     }]
+// Define survey Schema
+// var SurveySchema = new Schema({
+//     //userId: String,
+//    multipleChoice:
+//         {          
+//            question: [{
+//                 title: String,
+//                 options: [String]
+//                      }]
            
-        },   
-    //tureFalse:
-    //    {
+//         },   
+//     //tureFalse:
+//     //    {
 
-    //    },
-    //created: Number,
-    //updated: Number
+//     //    },
+//     //created: Number,
+//     //updated: Number    
+// }, {
+//     collection: 'Survey'
+// });
+
+//*******Test by Chang*****
+var SurveySchema = new Schema({
+    name: String,
+    completed: Boolean,
+    username: String,
+    note: String,
+    updated_at: {type:Date, default: Date.now}
 }, {
-    collection: 'Survey'
+    collection: 'surveys'
 });
 
 

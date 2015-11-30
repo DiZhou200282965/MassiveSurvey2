@@ -2,29 +2,15 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
-var mongoose = require('mongoose');
 var User = require('../models/user');
 
-
-
-// GET about page
-router.get('/about', function (req, res, next) {
-    res.render('about', {
-        title: 'About',
-        displayName: req.user ? req.user.displayName : ''
-    });
-});
-
-
-
-// GET services page
-router.get('/services', function (req, res, next) {
-    res.render('services', {
-        title: 'Services',
-        displayName: req.user ? req.user.displayName : ''
-    });
-})
-
+/* check if user is authenticatd */
+function requireAuth(req, res, next){
+  if(!req.isAuthenticated()){
+    return res.redirect('/login');
+  }
+  next();
+}
 
 /* Render home page. */
 router.get('/', function (req, res, next) {
@@ -32,6 +18,15 @@ router.get('/', function (req, res, next) {
         title: 'Home',
         displayName: req.user ? req.user.displayName : ''
     });
+});
+
+/* GET survey list page. */
+router.get('/surveyList', requireAuth, function(req, res, next) {
+  res.render('surveys/index', { 
+      title: 'Survey List',
+      displayName: req.user ? req.user.displayName : '',
+      username: req.user ? req.user.username : '' 
+  });
 });
 
 /* Render Login page. */
