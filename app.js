@@ -1,4 +1,3 @@
-//SHIYISHI
 //load all modules
 var express = require('express');
 var path = require('path');
@@ -14,23 +13,23 @@ var passport = require('passport');
 
 
 //DB Setup
-var DB = require('./config/db.js');
+var DB = require('./server/config/db.js');
 mongoose.connect(DB.url);
 mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Failed..');
 });
 
-var addSurvey = require('./routes/addSurvey.js');
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var addSurvey = require('./server/routes/addSurvey.js');
+var routes = require('./server/routes/index');
+var users = require('./server/routes/users');
 // var businesscontacts = require(('./routes/businesscontacts'));
 
 var app = express();
 
-require('./config/passport')(passport);
+require('./server/config/passport')(passport);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'server/views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
