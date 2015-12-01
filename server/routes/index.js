@@ -39,7 +39,7 @@ router.get('/login', function (req, res, next) {
         });
     }
     else {
-        return res.redirect('/');//redirect to home page if logged in
+        return res.redirect('/surveys/index');//redirect to survey page if logged in
     }
 });
 

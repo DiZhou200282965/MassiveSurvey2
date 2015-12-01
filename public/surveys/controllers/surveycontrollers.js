@@ -1,11 +1,20 @@
 (function () {
     var moduleName = "surveyControllers";
     var app = angular.module(moduleName, ['ngRoute', 'ngResource', 'surveyServices', 'surveyRoutes']);
+
+    // app.directive('surveyDetails', function() {
+    //   return {
+    //     restrict:'E',
+    //     templateUrl: "/survey-details.html"
+    //   };
+    // });
+
     // Controllers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     app.controller('SurveyController', ['$scope', 'Surveys', function ($scope, Surveys) {
         $scope.editing = [];
         $scope.username = '';
         $scope.userSurveys = [];
+        $scope.answers = [];
         $scope.setUserName = function (userName) {
                 $scope.username = userName; //get the username
                 $scope.surveys = Surveys.query(function () {
@@ -19,27 +28,48 @@
                 });
             };
 
+
+            //     $scope.addAnswer = function(){  
+            //     $scope.answers = [];              
+            //     $scope.answers.push($scope.newAnswer);
+            // };
+            $scope.addAnswer = function() {
+                var newAnser = $scope.newAnswer;
+                $scope.answers.push(newAnser);
+                $scope.newAnswer='';
+            };
+
             $scope.save = function () {
                 // if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
                 //     return;
                 // }
+                
                 var survey = new Surveys({ name: $scope.newSurvey, username: $scope.username, 
                     multipleChoice:
-                    {          
+                    {
                        question: $scope.newQuestion,
-                       answers: [$scope.newAnswer1, $scope.newAnswer2, $scope.newAnswer3]
+                       answers: $scope.answers
                     },
                     completed: false });
+
                 survey.$save(function () {
+
                     $scope.surveys.push(survey);
                     // clear textbox
                     $scope.newSurvey = '';
                     $scope.newQuestion = ''; 
-                    $scope.newAnswer1 = '';
-                    $scope.newAnswer2 = '';
-                    $scope.newAnswer3 = '';
+                    $scope.answers = [];
                 });
             };
+
+
+            // $scope.answers = [];
+            // $scope.addAnswer = function(){
+                
+            //     $scope.answers.push();
+
+            // };
+
             $scope.update = function (index) {
                 var survey = $scope.surveys[index];
                 Surveys.update({ id: survey._id }, survey);

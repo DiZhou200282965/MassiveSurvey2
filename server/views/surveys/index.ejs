@@ -5,6 +5,7 @@
         </div> <!-- container -->
 
         <script type="text/ng-template" id="/surveys.html">
+
             
             <div class="panel panel-default" ng-init="setUserName('<%= username %>')">
                 <div class="panel-heading">
@@ -49,41 +50,49 @@
                     <h5>New Survey</h5>
                     <input type="text" ng-model="newSurvey" id="newSurvey" placeholder="Survey Name" class="form-control">
                     <input type="text" ng-model="newQuestion" id="newQuestion" placeholder="New Question" class="form-control">
-                    <!-- **********hardcoding, need to change********** -->
-                    <input type="text" ng-model="newAnswer1" id="newAnswer1" placeholder="New Answer1" class="form-control">
-                    <input type="text" ng-model="newAnswer2" id="newAnswer2" placeholder="New Answer2" class="form-control">
-                    <input type="text" ng-model="newAnswer3" id="newAnswer3" placeholder="New Answer3" class="form-control">
+                    <input type="text" ng-model="newAnswer" id="newAnswer" placeholder="New Answer" class="form-control">
+                    <button ng-click="addAnswer()">Add an answer</button>
+                    <!-- Need to show answers here -->
+                    
+                    
+                    
+                    <div ng-repeat="answer in survey.multipleChoice.answers">{{answer}}</div>                    
                     <button type="button" ng-click="save()" class="btn btn-primary">Create</button>
+                    
 
                 </div> <!-- panel-body -->
             </div> <!-- panel panel-default -->
+
+
+
+
         </script>
 
         <script type="text/ng-template" id="/surveyDetails.html">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">{{ survey.name }}</h2>
+                <h2 class="panel-title">{{ survey.name }}</h2>
                 </div><!-- panel-heading -->
                 <div class="panel-body">
-                    <h3>complete? <input type="checkbox" ng-model="survey.completed"></h3>
-                    <h3>Question:</h3>
-                        <textarea ng-model="survey.multipleChoice.question" class="form-control"></textarea>
-                        <br>
-                    <h3>Answers:</h3>
-                        <!-- ????????????When updating, can only change one letter at a time, why???????? -->
-                        <div ng-repeat="answer in survey.multipleChoice.answers">
-                            <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
-                        </div>
-                    <div class="btn-group">
-                        <button type="button" ng-click="update()" class="btn btn-warning">update</button>
-                        <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
-                        <button type="button" ng-click="cancel()" class="btn btn-default">cancel</button>
-                    </div> <!-- btn-group -->
+                <h3>complete? <input type="checkbox" ng-model="survey.completed"></h3>
+                <h3>Question:</h3>
+                <textarea ng-model="survey.multipleChoice.question" class="form-control"></textarea>
+                <br>
+                <h3>Answers:</h3>
+                <!-- ????????????When updating, can only change one letter at a time, why???????? -->
+                <div ng-repeat="answer in survey.multipleChoice.answers">
+                    <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="button" ng-click="update()" class="btn btn-warning">update</button>
+                    <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
+                    <button type="button" ng-click="cancel()" class="btn btn-default">cancel</button>
+                </div> <!-- btn-group -->
 
                 </div> <!-- panel-body -->
             </div> <!-- panel panel-default -->
-
         </script>
+        
 
 
 <% include ../partials/boot.ejs %>
