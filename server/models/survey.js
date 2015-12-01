@@ -31,10 +31,10 @@ var SurveySchema = new Schema({
     completed: Boolean,
     username: String,
     multipleChoice:
-    {          
+    [{          
        question: String,
        answers: [String]
-    },
+    }],
     shortAnswer:
     [{
         id: Number,
