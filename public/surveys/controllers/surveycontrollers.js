@@ -29,20 +29,33 @@
             };
 
 
-            //     $scope.addAnswer = function(){  
-            //     $scope.answers = [];              
-            //     $scope.answers.push($scope.newAnswer);
-            // };
-            $scope.addAnswer = function() {
-                var newAnser = $scope.newAnswer;
-                $scope.answers.push(newAnser);
+            
+            //adding short answer question
+            var counter = 0;
+              $scope.questionelemnt = [{
+                id: counter,
+                saQuestion: 'Question-Click on me to edit!',
+                saAnswer: '',
+              }];
+
+              $scope.newItem = function ($event) {
+                counter++;
+                $scope.questionelemnt.push({
+                  id: counter,
+                  saQuestion: 'Question-Click on me to edit!',
+                  saAnswer: '',
+                });
+                $event.preventDefault();
+              };
+              $scope.addAnswer = function() {
+                var newAnswer = $scope.newAnswer;
+                $scope.answers.push(newAnswer);
                 $scope.newAnswer='';
             };
-
             $scope.save = function () {
-                // if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
-                //     return;
-                // }
+                if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
+                    return;
+                }
                 
                 var survey = new Surveys({ name: $scope.newSurvey, username: $scope.username, 
                     multipleChoice:
@@ -50,15 +63,17 @@
                        question: $scope.newQuestion,
                        answers: $scope.answers
                     },
+                    shortAnswer: $scope.questionelemnt,
                     completed: false });
 
+                //save into db
                 survey.$save(function () {
-
                     $scope.surveys.push(survey);
-                    // clear textbox
+                    // clear inputs
                     $scope.newSurvey = '';
                     $scope.newQuestion = ''; 
                     $scope.answers = [];
+                    $scope.questionelemnt = [];
                 });
             };
 
@@ -126,4 +141,8 @@ app.controller('SurveyDetailCtrl', ['$scope', '$routeParams', 'Surveys', '$locat
             $location.url('/');
         };
     }]);
+
+
+
+
 })(); //end of closure

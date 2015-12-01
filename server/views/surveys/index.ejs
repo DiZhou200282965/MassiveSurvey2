@@ -34,7 +34,6 @@
                                     <br>
                                 <p ng-show="editing[$index]">Answers:</p>
                                     <!-- ????????????When updating, can only change one letter at a time, why???????? -->
-                                    <!-- ????????????Here only 1st answer is shown???????? -->
                                     <div ng-show="editing[$index]" ng-repeat="answer in survey.multipleChoice.answers">
                                         <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
                                     </div>
@@ -53,12 +52,42 @@
                     <input type="text" ng-model="newAnswer" id="newAnswer" placeholder="New Answer" class="form-control">
                     <button ng-click="addAnswer()">Add an answer</button>
                     <!-- Need to show answers here -->
+                    <div ng-repeat="answer in survey.multipleChoice.answers">
+                        <p>{{answer}}</p>
+                    </div>                    
                     
-                    
-                    
-                    <div ng-repeat="answer in survey.multipleChoice.answers">{{answer}}</div>                    
+
+                    <!-- Add Short Answer -->
+                    <li ng-repeat="elemnt in questionelemnt">
+                        <div>
+                          <div id={{elemnt.id}} style="display:inline">
+                            <span ng-model="elemnt.saQuestion" ng-hide="editorEnabled" ng-click="editorEnabled=true">
+                              {{elemnt.saQuestion}}
+                            </span>
+                            <div ng-show="editorEnabled">
+                              <input ng-model="elemnt.saQuestion" ng-show="editorEnabled">
+                              <button href="#" ng-click="editorEnabled=false">Done editing</button>
+                            </div>
+                          </div>
+                          <div style="display:inline">
+                            <span>
+                              <input type="text" ng-model="elemnt.saAnswer" placeholder="Answer" required/>
+                            </span>
+                          </div>                          
+                          <span ng-hide="elemnt.length == 1">
+                            <a href ng-click="questionelemnt.splice($index, 1)">remove</a>
+                          </span>
+                        </div>
+                        <hr/>
+                      </li>
+                    <li>
+                        <a href ng-click="newItem($event)">New Short Answer Question</a>
+                    </li>
+                    <!-- End of Add Short Answer -->
+
+                    <!-- Submit Survey -->
                     <button type="button" ng-click="save()" class="btn btn-primary">Create</button>
-                    
+
 
                 </div> <!-- panel-body -->
             </div> <!-- panel panel-default -->

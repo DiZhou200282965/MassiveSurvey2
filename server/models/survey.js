@@ -31,10 +31,16 @@ var SurveySchema = new Schema({
     completed: Boolean,
     username: String,
     multipleChoice:
-        {          
-           question: String,
-           answers: [String]
-        },
+    {          
+       question: String,
+       answers: [String]
+    },
+    shortAnswer:
+    [{
+        id: Number,
+        saQuestion: String,
+        saAnswer: String
+    }],
     updated_at: {type:Date, default: Date.now}
 }, {
     collection: 'surveys'
