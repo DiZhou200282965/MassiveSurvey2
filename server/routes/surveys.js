@@ -23,6 +23,31 @@ router.get('/', requireAuth, function(req, res, next) {
 });
 
 
+// SURVEY.create({ multipleChoice: { title: req.body.title, content: contents } }, function (err, survey) {
+//                if (err) {
+//                    return next(err);
+//                }
+//                console.log(contents);
+//                res.json(survey);
+//            });
+//________________________
+// router.post('/', requireAuth, function(req, res, next){
+    
+//     var survey = new SURVEY({
+//         multipleChoice: { question: { title: req.body.title, options: [req.body.option1,req.body.option2,req.body.option3]} }
+//     });
+//     survey.save(function (err) {
+//         if (err) {
+//             console.log(err);
+//             res.end(err);
+//         }
+//         else {
+//             res.redirect('/surveys');
+//         }
+//     });
+//   });
+//________________________
+
 /* CREATE SURVEYS */
 router.post('/', requireAuth, function(req, res, next){
    Survey.create(req.body, function(err, post){
@@ -115,14 +140,14 @@ router.delete('/:id', requireAuth, function(req,res,next){
 //     });
 
 // });
-// //    SURVEY.create({ multipleChoice: { title: req.body.title, content: contents } }, function (err, survey) {
-// //                if (err) {
-// //                    return next(err);
-// //                }
-// //                console.log(contents);
-// //                res.json(survey);
-// //            });
-// //})
+//    SURVEY.create({ multipleChoice: { title: req.body.title, content: contents } }, function (err, survey) {
+//                if (err) {
+//                    return next(err);
+//                }
+//                console.log(contents);
+//                res.json(survey);
+//            });
+// })
 
 // ******************************
 

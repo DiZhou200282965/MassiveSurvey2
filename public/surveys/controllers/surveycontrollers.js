@@ -3,10 +3,10 @@
     var app = angular.module(moduleName, ['ngRoute', 'ngResource', 'surveyServices', 'surveyRoutes']);
     // Controllers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     app.controller('SurveyController', ['$scope', 'Surveys', function ($scope, Surveys) {
-            $scope.editing = [];
-            $scope.username = '';
-            $scope.userSurveys = [];
-            $scope.setUserName = function (userName) {
+        $scope.editing = [];
+        $scope.username = '';
+        $scope.userSurveys = [];
+        $scope.setUserName = function (userName) {
                 $scope.username = userName; //get the username
                 $scope.surveys = Surveys.query(function () {
                     $scope.userSurveys = []; // reset the userSurveys array
@@ -18,14 +18,26 @@
                     $scope.surveys = $scope.userSurveys;
                 });
             };
+
             $scope.save = function () {
-                if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
-                    return;
-                }
-                var survey = new Surveys({ name: $scope.newSurvey, username: $scope.username, completed: false });
+                // if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
+                //     return;
+                // }
+                var survey = new Surveys({ name: $scope.newSurvey, username: $scope.username, 
+                    multipleChoice:
+                    {          
+                       question: $scope.newQuestion,
+                       answers: [$scope.newAnswer1, $scope.newAnswer2, $scope.newAnswer3]
+                    },
+                    completed: false });
                 survey.$save(function () {
                     $scope.surveys.push(survey);
-                    $scope.newSurvey = ''; // clear textbox
+                    // clear textbox
+                    $scope.newSurvey = '';
+                    $scope.newQuestion = ''; 
+                    $scope.newAnswer1 = '';
+                    $scope.newAnswer2 = '';
+                    $scope.newAnswer3 = '';
                 });
             };
             $scope.update = function (index) {
@@ -66,21 +78,22 @@
                 return count;
             };
         }]);
-    app.controller('SurveyDetailCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
-        function ($scope, $routeParams, Surveys, $location) {
-            $scope.survey = Surveys.get({ id: $routeParams.id });
-            $scope.update = function () {
-                Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
-                    $location.url('/');
-                });
-            };
-            $scope.remove = function () {
-                Surveys.remove({ id: $scope.survey._id }, function () {
-                    $location.url('/');
-                });
-            };
-            $scope.cancel = function () {
+
+app.controller('SurveyDetailCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
+    function ($scope, $routeParams, Surveys, $location) {
+        $scope.survey = Surveys.get({ id: $routeParams.id });
+        $scope.update = function () {
+            Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
                 $location.url('/');
-            };
-        }]);
+            });
+        };
+        $scope.remove = function () {
+            Surveys.remove({ id: $scope.survey._id }, function () {
+                $location.url('/');
+            });
+        };
+        $scope.cancel = function () {
+            $location.url('/');
+        };
+    }]);
 })(); //end of closure
