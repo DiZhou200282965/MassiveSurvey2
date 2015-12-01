@@ -19,16 +19,40 @@ Manage MY Survey(s)：  可以添加各种各样的题型
 Survey Result： 统计 ，待定
     ---------------------------------------------------------
 题型				内容     			             				                            	   
-两项选择						黑或白
-Multiple choice				多选1
+两项选择twoOption         		                    黑或白
+Multiple choice                         多选1
 Short answer                            自己的见解
 Check box                               多选多（单）
 排序题      （option）                   排序
 Scale	（option）                      对一件事物的喜欢程度
 ------------------------------------------------------------------------------
-Schema 待定
-{
-
+Schema
+{	
+    name: String,
+    category: String,
+    completed: Boolean,
+    username: String,
+    twoOption:
+    [{
+        option1: String,
+        option2: String
+    }],
+    multipleChoice:
+    [{          
+       mcQuestion: String,
+       mcAnswers: [String]
+    }],
+    shortAnswer: [String],
+    checkBox:
+    [{
+        cbQuestion: String,
+        cbAnswers: [String]
+    }],
+    rank:
+    [{
+        rankQuestion: String,
+        rankAnswers: [String]
+    }],
+    scaleQuestion: [String],
+    updated_at: {type:Date, default: Date.now}
 }
-  
-//123
