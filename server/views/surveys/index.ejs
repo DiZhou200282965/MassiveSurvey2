@@ -47,43 +47,48 @@
                     </ul>
 
                     <h5>New Survey</h5>
+                    <!-- Survey Name -->
                     <input type="text" ng-model="newSurvey" id="newSurvey" placeholder="Survey Name" class="form-control">
-                    <input type="text" ng-model="newQuestion" id="newQuestion" placeholder="New Question" class="form-control">
-                    <input type="text" ng-model="newAnswer" id="newAnswer" placeholder="New Answer" class="form-control">
-                    <button ng-click="addAnswer()">Add an answer</button>
-                    <!-- Need to show answers here -->
-                    <div ng-repeat="answer in survey.multipleChoice.answers">
-                        <p>{{answer}}</p>
-                    </div>                    
-                    
+                    <input type="text" ng-model="sCategory" id="sCategory" placeholder="Category" class="form-control">
+
+                    <!-- Add Two-Option Questions -->
+                    <li ng-repeat="twoOption in multipleChoiceArray">
+                        <input type="text" ng-model="multipleChoiceArray[$index].twoOptionQuestion" placeholder="Enter the question here"/>
+                        <input type="text" ng-model="multipleChoiceArray[$index].option1" placeholder="Enter option1 here"/>
+                        <input type="text" ng-model="multipleChoiceArray[$index].option2" placeholder="Enter option2 here"/>
+                        <span ng-hide="twoOption.length == 1">
+                            <a href ng-click="multipleChoiceArray.splice($index, 1)">remove this question</a>
+                        </span>
+                        <li>
+                        <a href ng-click="newTwoOptionQuestion($event)">New Two-Option Question</a>
+                        </li>    
+                    </li> 
 
                     <!-- Add Short Answer -->
-                    <li ng-repeat="elemnt in questionelemnt">
-                        <div>
-                          <div id={{elemnt.id}} style="display:inline">
-                            <span ng-model="elemnt.saQuestion" ng-hide="editorEnabled" ng-click="editorEnabled=true">
-                              {{elemnt.saQuestion}}
-                            </span>
-                            <div ng-show="editorEnabled">
-                              <input ng-model="elemnt.saQuestion" ng-show="editorEnabled">
-                              <button href="#" ng-click="editorEnabled=false">Done editing</button>
-                            </div>
-                          </div>
-                          <div style="display:inline">
-                            <span>
-                              <input type="text" ng-model="elemnt.saAnswer" placeholder="Answer" required/>
-                            </span>
-                          </div>                          
-                          <span ng-hide="elemnt.length == 1">
-                            <a href ng-click="questionelemnt.splice($index, 1)">remove</a>
-                          </span>
-                        </div>
-                        <hr/>
-                      </li>
-                    <li>
-                        <a href ng-click="newItem($event)">New Short Answer Question</a>
-                    </li>
-                    <!-- End of Add Short Answer -->
+                    <li ng-repeat="saQuestion in saQuestionArray">
+                        <input type="text" ng-model="saQuestionArray[$index]" placeholder="Enter the question here"/>
+                        <span ng-hide="saQuestion.length == 1">
+                            <a href ng-click="saQuestionArray.splice($index, 1)">remove</a>
+                        </span>
+                        <li>
+                        <a href ng-click="newSAQuestion($event)">New Short Answer Question</a>
+                        </li>    
+                    </li> 
+
+                    <!-- multipleChoice !!!!!NEEDS TO BE MODIFIED!!!!!!-->
+                    <li ng-repeat="multipleChoice in multipleChoiceArray">
+                        <input type="text" ng-model="multipleChoice.mcQuestion" placeholder="Enter the question here"/>
+                        <li ng-repeat="mcChoice in multipleChoiceArray">
+                            <input type="text" ng-model="multipleChoice.mcChoices[#index]" placeholder="Enter choices here"/> 
+                        </li>                       
+                        <span ng-hide="multipleChoice.length == 1">
+                            <a href ng-click="multipleChoiceArray.splice($index, 1)">remove this question</a>
+                        </span>
+                        <li>
+                        <a href ng-click="newMultipleChoiceQuestion($event)">New Multiple-Choice Question</a>
+                        </li>    
+                    </li> 
+
 
                     <!-- Submit Survey -->
                     <button type="button" ng-click="save()" class="btn btn-primary">Create</button>

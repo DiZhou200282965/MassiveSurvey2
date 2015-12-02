@@ -33,13 +33,14 @@ var SurveySchema = new Schema({
     username: String,
     twoOption:
     [{
+        twoOptionQuestion: String,
         option1: String,
         option2: String
     }],
     multipleChoice:
     [{          
        mcQuestion: String,
-       mcAnswers: [String]
+       mcChoices: [String]
     }],
     shortAnswer: [String],
     checkBox:
