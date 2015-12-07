@@ -14,19 +14,12 @@
         $scope.editing = [];
         $scope.username = '';
         $scope.userSurveys = [];
-<<<<<<< HEAD
          // $scope.answers = [];
         $scope.shortQueArry = [];
         $scope.twoOptionArray = [];
       //  $scope.multipleChoiceArray = [];
        // $scope.mcAnswersArray = [];
 
-=======
-        $scope.answers = [];
-        $scope.saQuestionArray = [];
-        $scope.twoOptionArray = [];
-        $scope.mcAnswersArray = [];
->>>>>>> origin/master
         $scope.setUserName = function (userName) {
             $scope.username = userName; //get the username
             $scope.surveys = Surveys.query(function () {
@@ -46,7 +39,6 @@
          //   $event.preventDefault();
        };
 
-<<<<<<< HEAD
         //two-option
    
         $scope.newTwoOptionQuestion = function ($event) {
@@ -61,80 +53,6 @@
         //         mcChoices: $scope.multipleChoiceArray //not sure
         //        })
         //};
-=======
-            $scope.addAnswer = function() {
-                var newAnswer = $scope.newAnswer;
-                $scope.answers.push(newAnswer);
-                $scope.newAnswer='';
-            };
-
-            //short-answer
-            $scope.newSAQuestion = function ($event) {
-                $scope.saQuestionArray.push($scope.saQuestion);//有问题
-                $event.preventDefault();
-            };
-            //two-option
-            $scope.twoOptionArray = [{
-                twoOptionQuestion: 'Question',
-                option1: 'Option1',
-                option2: 'Option2'
-              }];
-              $scope.newTwoOptionQuestion = function ($event) {
-                $scope.twoOptionArray.push({
-                twoOptionQuestion: 'Question',
-                option1: 'Option1',
-                option2: 'Option2'
-              })
-            };
-            //multiple-choice
-            $scope.multipleChoiceArray = [{          
-                     mcQuestion: '',
-                     mcChoices: $scope.multipleChoiceArray //not sure
-                    }];
-              $scope.newMultipleChoiceQuestion = function ($event) {
-                $scope.multipleChoiceArray.push({          
-                     mcQuestion: '',
-                     mcChoices: $scope.multipleChoiceArray //not sure
-                    })
-            };
-
-            $scope.save = function () {
-                if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
-                    return;
-                }
-                //new survey object
-                var survey = new Surveys({
-                    name: $scope.newSurvey,
-                    category: $scope.sCategory,
-                    completed: false,
-                    username: $scope.username,
-                    twoOption: $scope.twoOptionArray,
-                    multipleChoice: $scope.multipleChoiceArray,                    
-                 shortAnswer: $scope.saQuestionArray,
-                 checkBox:
-                 [{
-                    cbQuestion: String,
-                    cbAnswers: [String]
-                }],
-                rank:
-                [{
-                    rankQuestion: String,
-                    rankAnswers: [String]
-                }],
-                scaleQuestion: [String],
-                });
-
-                //save into db
-                survey.$save(function () {
-                    $scope.surveys.push(survey);
-                    // clear inputs
-                    $scope.newSurvey = '';
-                    $scope.newQuestion = ''; 
-                    $scope.answers = [];
-                    $scope.saQuestionArray = [];
-                });
-            };
->>>>>>> origin/master
 
         $scope.save = function () {
             if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
@@ -162,7 +80,6 @@
                 //scaleQuestion: [String],
             });
 
-<<<<<<< HEAD
             //save into db
             survey.$save(function () {
                 $scope.surveys.push(survey);
@@ -175,12 +92,6 @@
                 $scope.shortQueArry = [];
             });
         };
-=======
-            // $scope.answers = [];
-            // $scope.addAnswer = function(){
-
-            //     $scope.answers.push();
->>>>>>> origin/master
 
 
         // $scope.answers = [];
