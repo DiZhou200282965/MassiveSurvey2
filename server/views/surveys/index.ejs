@@ -1,129 +1,132 @@
-<% include ../partials/header.ejs %>
+<!--<% include ../partials/header.ejs %>
 
         <div class="container">
             <ng-view></ng-view>
         </div> <!-- container -->
+<script type="text/ng-template" id="/surveys.html">
 
-        <script type="text/ng-template" id="/surveys.html">
+    <div class="panel panel-default" ng-init="setUserName('<%= username %>')">
+        <div class="panel-heading">
+            <h1 class="panel-title"><%= title %></h1>
+        </div> <!-- panel-heading -->
+        <div class="panel-body">
+            <h4><span class="badge">{{remainingSurveys()}}</span> Surveys of <span class="badge">{{totalSurveys()}}</span> remaining</h4>
+            <h5>Search Surveys:</h5>
+            <input type="text" ng-model="search" id="searchSurvey" placeholder="Survey to find" class="form-control">
+            <ul class="list-group">
+                <li class="list-group-item active">Current Surveys</li>
+                <li ng-repeat="survey in surveys | filter: search | filter: {username: '<%= username %>'}" class="list-group-item">
+                    <div class="btn-group">
+                        <button type="button" ng-show="!editing[$index]" ng-click="edit($index)" class="btn btn-default "><i class="fa fa-edit"></i></button>
+                    </div> <!-- btn-group -->
 
-            
-            <div class="panel panel-default" ng-init="setUserName('<%= username %>')">
-                <div class="panel-heading">
-                    <h1 class="panel-title"><%= title %></h1>
-                </div> <!-- panel-heading -->
-                <div class="panel-body">
-                    <h4><span class="badge">{{remainingSurveys()}}</span> Surveys of <span class="badge">{{totalSurveys()}}</span> remaining</h4>
-                    <h5>Search Surveys:</h5>
-                    <input type="text" ng-model="search.name" id="searchSurvey" placeholder="Survey to find" class="form-control">
+                    <span ng-show="editing[$index]">complete?</span>
+                    <input type="checkbox" ng-model="survey.completed" ng-change="update($index)">
+                    <span class="surveys">
+                        <a ng-show="!editing[$index]" href="#/{{survey._id}}" class="completed-{{survey.completed}}">{{survey.name}}</a>
+                    </span>
+                    <p ng-show="editing[$index]">Survey Name:</p>
+                    <input ng-show="editing[$index]" type="text" ng-model="survey.name" class="form-control">
+                    <p ng-show="editing[$index]">Question:</p>
+                    <textarea ng-show="editing[$index]" ng-model="survey.multipleChoice.question" class="form-control"></textarea>
+                    <br>
+                    <p ng-show="editing[$index]">Answers:</p>
+                    <!-- ????????????When updating, can only change one letter at a time, why???????? -->
+                    <div ng-show="editing[$index]" ng-repeat="answer in survey.multipleChoice.answers">
+                        <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
+                    </div>
 
-                    <ul class="list-group">
-                        <li class="list-group-item active">Current Surveys</li>
-                        <li ng-repeat="survey in surveys | filter: search | filter: {username: '<%= username %>'}" class="list-group-item">
-                            <div class="btn-group">
-                                <button type="button" ng-show="!editing[$index]" ng-click="edit($index)" class="btn btn-default "><i class="fa fa-edit"></i></button>
-                            </div> <!-- btn-group -->
-                            
-                                <span ng-show="editing[$index]">complete?</span>
-                                <input type="checkbox" ng-model="survey.completed" ng-change="update($index)">
-                                <span class="surveys">
-                                    <a ng-show="!editing[$index]" href="#/{{survey._id}}" class="completed-{{survey.completed}}">{{survey.name}}</a></span>
-                                <p ng-show="editing[$index]">Survey Name:</p>
-                                    <input ng-show="editing[$index]" type="text" ng-model="survey.name" class="form-control">
-                                <p ng-show="editing[$index]">Question:</p>
-                                    <textarea ng-show="editing[$index]" ng-model="survey.multipleChoice.question" class="form-control"></textarea>
-                                    <br>
-                                <p ng-show="editing[$index]">Answers:</p>
-                                    <!-- ????????????When updating, can only change one letter at a time, why???????? -->
-                                    <div ng-show="editing[$index]" ng-repeat="answer in survey.multipleChoice.answers">
-                                        <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
-                                    </div>
-                            
-                            <div class="btn-group">
-                                <button type="button" ng-show="editing[$index]" ng-click="update($index)" class="btn btn-warning">update</button>
-                                <button type="button" ng-show="editing[$index]" ng-click="remove($index)" class="btn btn-danger">remove</button>
-                                <button type="button" ng-show="editing[$index]" ng-click="cancel($index)" class="btn btn-default">cancel</button>
-                            </div> <!-- btn-group -->
-                        </li>
-                    </ul>
+                    <div class="btn-group">
+                        <button type="button" ng-show="editing[$index]" ng-click="update($index)" class="btn btn-warning">update</button>
+                        <button type="button" ng-show="editing[$index]" ng-click="remove($index)" class="btn btn-danger">remove</button>
+                        <button type="button" ng-show="editing[$index]" ng-click="cancel($index)" class="btn btn-default">cancel</button>
+                    </div> <!-- btn-group -->
+                </li>
+            </ul>
+            <h5>New Survey</h5>
+            <!-- Survey Name -->
+            <input type="text" ng-model="newSurvey" id="newSurvey" placeholder="Survey Name" class="form-control">
+            <input type="text" ng-model="sCategory" id="sCategory" placeholder="Category" class="form-control">
+            <h5>Two Option</h5>
+            <!-- Add Two-Option Questions -->
+            <li ng-repeat="twoOption in twoOptionArray">
+                <input type="text" ng-model="twoOptionArray[$index].twoOptionQuestion" placeholder="Enter the question here" />
+                <input type="text" ng-model="twoOptionArray[$index].option1" placeholder="Enter option1 here" />
+                <input type="text" ng-model="twoOptionArray[$index].option2" placeholder="Enter option2 here" />
+                <span >
+                    <a href ng-click="twoOptionArray.splice($index, 1)">remove this question</a>
+                </span>
+            <li>
+                <a href ng-click="newTwoOptionQuestion($event)">New Two-Option Question</a>
+            </li>
+            </li>
 
-                    <h5>New Survey</h5>
-                    <input type="text" ng-model="newSurvey" id="newSurvey" placeholder="Survey Name" class="form-control">
-                    <input type="text" ng-model="newQuestion" id="newQuestion" placeholder="New Question" class="form-control">
-                    <input type="text" ng-model="newAnswer" id="newAnswer" placeholder="New Answer" class="form-control">
-                    <button ng-click="addAnswer()">Add an answer</button>
-                    <!-- Need to show answers here -->
-                    <div ng-repeat="answer in survey.multipleChoice.answers">
-                        <p>{{answer}}</p>
-                    </div>                    
-                    
+            <!-- Add Short Answer -->
+            <h5>Short Anwser</h5>
+            <li ng-repeat="shortQue in shortQueArry">
+                <input type="text" ng-model="shortQueArry[$index]" placeholder="Enter the question here" />
+                <span >
+                    <a href ng-click="shortQueArry.splice($index, 1)">remove</a>
+                </span>
+            <li>
+                <a href ng-click="AddShortAnswer($event)">New Short Answer Question</a>
+            </li>
+            </li>
 
-                    <!-- Add Short Answer -->
-                    <li ng-repeat="elemnt in questionelemnt">
-                        <div>
-                          <div id={{elemnt.id}} style="display:inline">
-                            <span ng-model="elemnt.saQuestion" ng-hide="editorEnabled" ng-click="editorEnabled=true">
-                              {{elemnt.saQuestion}}
-                            </span>
-                            <div ng-show="editorEnabled">
-                              <input ng-model="elemnt.saQuestion" ng-show="editorEnabled">
-                              <button href="#" ng-click="editorEnabled=false">Done editing</button>
-                            </div>
-                          </div>
-                          <div style="display:inline">
-                            <span>
-                              <input type="text" ng-model="elemnt.saAnswer" placeholder="Answer" required/>
-                            </span>
-                          </div>                          
-                          <span ng-hide="elemnt.length == 1">
-                            <a href ng-click="questionelemnt.splice($index, 1)">remove</a>
-                          </span>
-                        </div>
-                        <hr/>
-                      </li>
-                    <li>
-                        <a href ng-click="newItem($event)">New Short Answer Question</a>
-                    </li>
-                    <!-- End of Add Short Answer -->
+            <!-- multipleChoice !!!!!NEEDS TO BE MODIFIED!!!!!!-->
+            <h5>Multiple Choice</h5>
+            <div>
+                <label>Number Of Question</label>
+                <input type="text" ng-model="numOfMulQ" />
+            </div>
 
-                    <!-- Submit Survey -->
-                    <button type="button" ng-click="save()" class="btn btn-primary">Create</button>
-
-
-                </div> <!-- panel-body -->
-            </div> <!-- panel panel-default -->
-
-
+            <li ng-repeat="multipleChoice in multipleChoiceArray">
+                <input type="text" ng-model="multipleChoice.mcQuestion" placeholder="Enter the question here" />
+            <li ng-repeat="mcChoice in multipleChoiceArray">
+                <input type="text" ng-model="multipleChoice.mcChoices[#index]" placeholder="Enter choices here" />
+            </li>
+            <span ng-hide="multipleChoice.length == 1">
+                <a href ng-click="multipleChoiceArray.splice($index, 1)">remove this question</a>
+            </span>
+            <li>
+                <a href ng-click="newMultipleChoiceQuestion($event)">New Multiple-Choice Question</a>
+            </li>
+            </li>
 
 
-        </script>
+            <!-- Submit Survey -->
+            <button type="button" ng-click="save()" class="btn btn-primary">Create</button>
 
-        <script type="text/ng-template" id="/surveyDetails.html">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                <h2 class="panel-title">{{ survey.name }}</h2>
-                </div><!-- panel-heading -->
-                <div class="panel-body">
-                <h3>complete? <input type="checkbox" ng-model="survey.completed"></h3>
-                <h3>Question:</h3>
-                <textarea ng-model="survey.multipleChoice.question" class="form-control"></textarea>
-                <br>
-                <h3>Answers:</h3>
-                <!-- ????????????When updating, can only change one letter at a time, why???????? -->
-                <div ng-repeat="answer in survey.multipleChoice.answers">
-                    <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
-                </div>
-                <div class="btn-group">
-                    <button type="button" ng-click="update()" class="btn btn-warning">update</button>
-                    <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
-                    <button type="button" ng-click="cancel()" class="btn btn-default">cancel</button>
-                </div> <!-- btn-group -->
+        </div> <!-- panel-body -->
+    </div> <!-- panel panel-default -->
 
-                </div> <!-- panel-body -->
-            </div> <!-- panel panel-default -->
-        </script>
-        
+
+</script>
+<script type="text/ng-template" id="/surveyDetails.html">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ survey.name }}</h2>
+        </div><!-- panel-heading -->
+        <div class="panel-body">
+            <h3>complete? <input type="checkbox" ng-model="survey.completed"></h3>
+            <h3>Question:</h3>
+            <textarea ng-model="survey.multipleChoice.question" class="form-control"></textarea>
+            <br>
+            <h3>Answers:</h3>
+            <!-- ????????????When updating, can only change one letter at a time, why???????? -->
+            <div ng-repeat="answer in survey.multipleChoice.answers">
+                <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
+            </div>
+            <div class="btn-group">
+                <button type="button" ng-click="update()" class="btn btn-warning">update</button>
+                <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
+                <button type="button" ng-click="cancel()" class="btn btn-default">cancel</button>
+            </div> <!-- btn-group -->
+        </div> <!-- panel-body -->
+    </div> <!-- panel panel-default -->
+</script>
 
 
 <% include ../partials/boot.ejs %>
 <% include ../partials/nglib.ejs %>
-<% include ../partials/footer.ejs %>
+<% include ../partials/footer.ejs %>-->

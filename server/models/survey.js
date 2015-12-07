@@ -28,19 +28,32 @@ var Schema = mongoose.Schema;
 //*******Test by Chang*****
 var SurveySchema = new Schema({	
     name: String,
+    category: String,
     completed: Boolean,
     username: String,
-    multipleChoice:
-    [{          
-       question: String,
-       answers: [String]
-    }],
-    shortAnswer:
+    twoOption:
     [{
-        id: Number,
-        saQuestion: String,
-        saAnswer: String
+        twoOptionQuestion: String,
+        option1: String,
+        option2: String
     }],
+    //multipleChoice:
+    //[{          
+    //   mcQuestion: String,
+    //   mcChoices: [String]
+    //}],
+    shortAnswer: [String],
+    //checkBox:
+    //[{
+    //    cbQuestion: String,
+    //    cbAnswers: [String]
+    //}],
+    //rank:
+    //[{
+    //    rankQuestion: String,
+    //    rankAnswers: [String]
+    //}],
+    //scaleQuestion: [String],
     updated_at: {type:Date, default: Date.now}
 }, {
     collection: 'surveys'

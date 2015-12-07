@@ -14,133 +14,149 @@
         $scope.editing = [];
         $scope.username = '';
         $scope.userSurveys = [];
-        $scope.answers = [];
+         // $scope.answers = [];
+        $scope.shortQueArry = [];
+        $scope.twoOptionArray = [];
+      //  $scope.multipleChoiceArray = [];
+       // $scope.mcAnswersArray = [];
+
         $scope.setUserName = function (userName) {
-                $scope.username = userName; //get the username
-                $scope.surveys = Surveys.query(function () {
-                    $scope.userSurveys = []; // reset the userSurveys array
-                    $scope.surveys.forEach(function (survey) {
-                        if (survey.username == $scope.username) {
-                            $scope.userSurveys.push(survey);
-                        }
-                    });
-                    $scope.surveys = $scope.userSurveys;
+            $scope.username = userName; //get the username
+            $scope.surveys = Surveys.query(function () {
+                $scope.userSurveys = []; // reset the userSurveys array
+                $scope.surveys.forEach(function (survey) {
+                    if (survey.username == $scope.username) {
+                        $scope.userSurveys.push(survey);
+                    }
                 });
-            };
+                $scope.surveys = $scope.userSurveys;
+            });
+        };
+
+        ////short-answer
+        $scope.AddShortAnswer = function ($event) {
+            $scope.shortQueArry.push($scope.saQuestion);//有问题
+         //   $event.preventDefault();
+       };
+
+        //two-option
+   
+        $scope.newTwoOptionQuestion = function ($event) {
+            $scope.twoOptionArray.push({ twoOptionQuestion: '', option1: '', option2: '' })
+        };
+     
+        ////multiple-choice
+ 
+        //  $scope.newMultipleChoiceQuestion = function ($event) {
+        //    $scope.multipleChoiceArray.push({          
+        //         mcQuestion: '',
+        //         mcChoices: $scope.multipleChoiceArray //not sure
+        //        })
+        //};
+
+        $scope.save = function () {
+            if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
+                return;
+            }
+            //new survey object
+            var survey = new Surveys({
+                name: $scope.newSurvey,
+                category: $scope.sCategory,
+                completed: false,
+                username: $scope.username,
+                twoOption: $scope.twoOptionArray,
+                multipleChoice: $scope.multipleChoiceArray,                    
+                // shortAnswer: $scope.saQuestionArray,
+                // checkBox:
+                // [{
+                //    cbQuestion: String,
+                //    cbAnswers: [String]
+                //}],
+                //rank:
+                //[{
+                //    rankQuestion: String,
+                //    rankAnswers: [String]
+                //}],
+                //scaleQuestion: [String],
+            });
+
+            //save into db
+            survey.$save(function () {
+                $scope.surveys.push(survey);
+                // clear inputs
+                $scope.newSurvey = '';
+                $scope.twoOptionArray = [];
+             //   $scope.multipleChoiceArray = [];
+                //$scope.newQuestion = ''; 
+                //$scope.answers = [];
+                $scope.shortQueArry = [];
+            });
+        };
 
 
-            
-            //adding short answer question
-            var counter = 0;
-              $scope.questionelemnt = [{
-                id: counter,
-                saQuestion: 'Question-Click on me to edit!',
-                saAnswer: '',
-              }];
+        // $scope.answers = [];
+        // $scope.addAnswer = function(){
 
-              $scope.newItem = function ($event) {
-                counter++;
-                $scope.questionelemnt.push({
-                  id: counter,
-                  saQuestion: 'Question-Click on me to edit!',
-                  saAnswer: '',
-                });
-                $event.preventDefault();
-              };
-              $scope.addAnswer = function() {
-                var newAnswer = $scope.newAnswer;
-                $scope.answers.push(newAnswer);
-                $scope.newAnswer='';
-            };
-            $scope.save = function () {
-                if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
-                    return;
+        //     $scope.answers.push();
+
+        // };
+
+        $scope.update = function (index) {
+            var survey = $scope.surveys[index];
+            Surveys.update({ id: survey._id }, survey);
+            $scope.editing[index] = false;
+        };
+        $scope.edit = function (index) {
+            $scope.editing[index] = angular.copy($scope.surveys[index]);
+        };
+        $scope.cancel = function (index) {
+            $scope.surveys[index] = angular.copy($scope.editing[index]);
+            $scope.editing[index] = false;
+        };
+        $scope.remove = function (index) {
+            var survey = $scope.surveys[index];
+            Surveys.remove({ id: survey._id }, function () {
+                $scope.surveys.splice(index, 1);
+            });
+            $scope.editing[index] = false;
+        };
+        $scope.remainingSurveys = function () {
+            var count = 0;
+            angular.forEach($scope.surveys, function (survey) {
+                if ($scope.username == survey.username) {
+                    count += survey.completed ? 0 : 1;
                 }
-                
-                var survey = new Surveys({ name: $scope.newSurvey, username: $scope.username, 
-                    multipleChoice:
-                    {
-                       question: $scope.newQuestion,
-                       answers: $scope.answers
-                    },
-                    shortAnswer: $scope.questionelemnt,
-                    completed: false });
-
-                //save into db
-                survey.$save(function () {
-                    $scope.surveys.push(survey);
-                    // clear inputs
-                    $scope.newSurvey = '';
-                    $scope.newQuestion = ''; 
-                    $scope.answers = [];
-                    $scope.questionelemnt = [];
-                });
-            };
-
-
-            // $scope.answers = [];
-            // $scope.addAnswer = function(){
-                
-            //     $scope.answers.push();
-
-            // };
-
-            $scope.update = function (index) {
-                var survey = $scope.surveys[index];
-                Surveys.update({ id: survey._id }, survey);
-                $scope.editing[index] = false;
-            };
-            $scope.edit = function (index) {
-                $scope.editing[index] = angular.copy($scope.surveys[index]);
-            };
-            $scope.cancel = function (index) {
-                $scope.surveys[index] = angular.copy($scope.editing[index]);
-                $scope.editing[index] = false;
-            };
-            $scope.remove = function (index) {
-                var survey = $scope.surveys[index];
-                Surveys.remove({ id: survey._id }, function () {
-                    $scope.surveys.splice(index, 1);
-                });
-                $scope.editing[index] = false;
-            };
-            $scope.remainingSurveys = function () {
-                var count = 0;
-                angular.forEach($scope.surveys, function (survey) {
-                    if ($scope.username == survey.username) {
-                        count += survey.completed ? 0 : 1;
-                    }
-                });
-                return count;
-            };
-            $scope.totalSurveys = function () {
-                var count = 0;
-                angular.forEach($scope.surveys, function (survey) {
-                    if ($scope.username == survey.username) {
-                        count++;
-                    }
-                });
-                return count;
-            };
-        }]);
-
-app.controller('SurveyDetailCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
-    function ($scope, $routeParams, Surveys, $location) {
-        $scope.survey = Surveys.get({ id: $routeParams.id });
-        $scope.update = function () {
-            Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
-                $location.url('/');
             });
+            return count;
         };
-        $scope.remove = function () {
-            Surveys.remove({ id: $scope.survey._id }, function () {
-                $location.url('/');
+        $scope.totalSurveys = function () {
+            var count = 0;
+            angular.forEach($scope.surveys, function (survey) {
+                if ($scope.username == survey.username) {
+                    count++;
+                }
             });
-        };
-        $scope.cancel = function () {
-            $location.url('/');
+            return count;
         };
     }]);
+
+    app.controller('SurveyDetailCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
+        function ($scope, $routeParams, Surveys, $location) {
+            $scope.survey = Surveys.get({ id: $routeParams.id });
+            $scope.update = function () {
+                Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
+                    $location.url('/');
+                });
+            };
+            $scope.remove = function () {
+                Surveys.remove({ id: $scope.survey._id }, function () {
+                    $location.url('/');
+                });
+            };
+            $scope.cancel = function () {
+                $location.url('/');
+            };
+        }]);
 
 
 
