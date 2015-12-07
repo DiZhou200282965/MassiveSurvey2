@@ -32,6 +32,7 @@ var SurveySchema = new Schema({
     completed: Boolean,
     username: String,
     twoOption:
+<<<<<<< HEAD
     [{
         twoOptionQuestion: String,
         option1: String,
@@ -54,6 +55,30 @@ var SurveySchema = new Schema({
     //    rankAnswers: [String]
     //}],
     //scaleQuestion: [String],
+=======
+    [{
+        twoOptionQuestion: String,
+        option1: String,
+        option2: String
+    }],
+    multipleChoice:
+    [{          
+       mcQuestion: String,
+       mcChoices: [String]
+    }],
+    shortAnswer: [String],
+    checkBox:
+    [{
+        cbQuestion: String,
+        cbAnswers: [String]
+    }],
+    rank:
+    [{
+        rankQuestion: String,
+        rankAnswers: [String]
+    }],
+    scaleQuestion: [String],
+>>>>>>> origin/master
     updated_at: {type:Date, default: Date.now}
 }, {
     collection: 'surveys'
