@@ -2,23 +2,15 @@
     var moduleName = "surveyControllers";
     var app = angular.module(moduleName, ['ngRoute', 'ngResource', 'surveyServices', 'surveyRoutes']);
 
-    // app.directive('surveyDetails', function() {
-    //   return {
-    //     restrict:'E',
-    //     templateUrl: "/survey-details.html"
-    //   };
-    // });
 
-    // Controllers ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    // Controllers 
     app.controller('SurveyController', ['$scope', 'Surveys', function ($scope, Surveys) {
+   
+        $scope.twOptArry = [];
         $scope.editing = [];
         $scope.username = '';
         $scope.userSurveys = [];
-         // $scope.answers = [];
-        $scope.shortQueArry = [];
-        $scope.twoOptionArray = [];
-      //  $scope.multipleChoiceArray = [];
-       // $scope.mcAnswersArray = [];
 
         $scope.setUserName = function (userName) {
             $scope.username = userName; //get the username
@@ -33,73 +25,47 @@
             });
         };
 
-        ////short-answer
-        $scope.AddShortAnswer = function ($event) {
-            $scope.shortQueArry.push($scope.saQuestion);//有问题
-         //   $event.preventDefault();
-       };
-
         //two-option
-   
-        $scope.newTwoOptionQuestion = function ($event) {
-            $scope.twoOptionArray.push({ twoOptionQuestion: '', option1: '', option2: '' })
+
+        $scope.AddTwoOptionQuestion = function () {
+            // add object to array
+            $scope.twOptArry.push({
+                twOptionQuestion: $scope.twOptionQuestion,
+                option1: $scope.option1,
+                option2: $scope.option2
+            });
+            // clear text
+            $scope.twOptionQuestion = "";
+            $scope.option1 = "";
+            $scope.option2 = "";
         };
-     
-        ////multiple-choice
- 
-        //  $scope.newMultipleChoiceQuestion = function ($event) {
-        //    $scope.multipleChoiceArray.push({          
-        //         mcQuestion: '',
-        //         mcChoices: $scope.multipleChoiceArray //not sure
-        //        })
-        //};
+      
+
 
         $scope.save = function () {
-            if (!$scope.newSurvey || $scope.newSurvey.length < 1) {
+            if (!$scope.surveyName || $scope.surveyName.length < 1) {
                 return;
             }
             //new survey object
             var survey = new Surveys({
-                name: $scope.newSurvey,
-                category: $scope.sCategory,
+                name: $scope.surveyName,
+                category: $scope.category,
                 completed: false,
                 username: $scope.username,
-                twoOption: $scope.twoOptionArray,
-                multipleChoice: $scope.multipleChoiceArray,                    
-                // shortAnswer: $scope.saQuestionArray,
-                // checkBox:
-                // [{
-                //    cbQuestion: String,
-                //    cbAnswers: [String]
-                //}],
-                //rank:
-                //[{
-                //    rankQuestion: String,
-                //    rankAnswers: [String]
-                //}],
-                //scaleQuestion: [String],
+                twoOption: $scope.twOptArry
             });
 
             //save into db
             survey.$save(function () {
                 $scope.surveys.push(survey);
                 // clear inputs
-                $scope.newSurvey = '';
-                $scope.twoOptionArray = [];
-             //   $scope.multipleChoiceArray = [];
-                //$scope.newQuestion = ''; 
-                //$scope.answers = [];
-                $scope.shortQueArry = [];
+                $scope.surveyName = '';
+                $scope.twOptArry = [];
             });
         };
 
 
-        // $scope.answers = [];
-        // $scope.addAnswer = function(){
 
-        //     $scope.answers.push();
-
-        // };
 
         $scope.update = function (index) {
             var survey = $scope.surveys[index];
@@ -159,6 +125,10 @@
         }]);
 
 
+    app.controller('createSurveyCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
+    function ($scope, $routeParams, Surveys, $location) {
+
+    }]);
 
 
 })(); //end of closure

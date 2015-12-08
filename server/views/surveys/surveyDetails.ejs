@@ -1,0 +1,21 @@
+﻿
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ survey.name }}</h2>
+        </div><!-- panel-heading -->
+        <div class="panel-body">
+            <h3>complete? <input type="checkbox" ng-model="survey.completed"></h3>
+            <h3>Question:</h3>
+            <textarea ng-model="survey.multipleChoice.question" class="form-control"></textarea>
+            <br>
+            <h3>Answers:</h3>
+            <div ng-repeat="answer in survey.multipleChoice.answers">
+                <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
+            </div>
+            <div class="btn-group">
+                <button type="button" ng-click="update()" class="btn btn-warning">update</button>
+                <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
+                <button type="button" ng-click="cancel()" class="btn btn-default">cancel</button>
+            </div> <!-- btn-group -->
+        </div> <!-- panel-body -->
+    </div> <!-- panel panel-default -->
