@@ -17,6 +17,12 @@ var SurveySchema = new Schema(
             option1: String,
             option2: String
         }],
+        multipleChoice:
+        [{
+        mulQue: String,
+        mulOpt: [String]
+        }],
+        shortAnswer:[String],
         updated_at:
             {
                 type: Date, default: Date.now
