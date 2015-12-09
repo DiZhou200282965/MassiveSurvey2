@@ -14,17 +14,8 @@ function requireAuth(req, res, next){
   next();
 }
 
-/* Render home page - survey list. */
-// router.get('/', function (req, res, next) {
-//     Article.find(function(err, surveys) {
-//     res.render('index', {
-//         title: 'Massive Survey',
-        
-//         surveys: surveys
-//     });
-// });
-router.get('/', function(req, res, next) {
-    //use the Ariticle model to query the Articles collection
+// Get Home page and render survey list
+router.get('/', function(req, res, next) {    
     Survey.find(function(err, surveys) {
         if (err) 
         {
@@ -33,7 +24,6 @@ router.get('/', function(req, res, next) {
         }
         else
         {
-            // no error, we found a list of surveys
             res.render('index', {
                 title: 'Massive Survey',
                 displayName: req.user ? req.user.displayName : '',
@@ -44,9 +34,9 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET survey list page. */
-router.get('/surveyList', requireAuth, function(req, res, next) {
+router.get('/mySurvey', requireAuth, function(req, res, next) {
   res.render('surveys/index', { 
-      title: 'Survey List',
+      title: 'My Survey List',
       displayName: req.user ? req.user.displayName : '',
       username: req.user ? req.user.username : '' 
   });
@@ -62,13 +52,13 @@ router.get('/login', function (req, res, next) {
         });
     }
     else {
-        return res.redirect('/surveys/index');//redirect to survey page if logged in
+        return res.redirect('/mySurvey')//redirect to mysurvey if logged in
     }
 });
 
 /* Process the Login Request */
 router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/', //redirect after login success
+    successRedirect: '/mySurvey', //redirect after login success
     failureRedirect: '/login',
     failureFlash: true
 }));
