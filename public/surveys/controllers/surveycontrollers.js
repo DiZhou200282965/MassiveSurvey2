@@ -6,7 +6,7 @@
 
     // Controllers 
     app.controller('SurveyController', ['$scope', 'Surveys', function ($scope, Surveys) {
-        
+
         $scope.twOptArry = [];
         $scope.mulQueArry = [];
         $scope.mulOptArry = [];
@@ -14,6 +14,10 @@
         $scope.editing = [];
         $scope.username = '';
         $scope.userSurveys = [];
+        $scope.twOptionQue = '';
+        $scope.option1 = '';
+        $scope.option2 = '';
+        $scope.shortAnswer = '';
 
         $scope.setUserName = function (userName) {
             $scope.username = userName; //get the username
@@ -32,21 +36,29 @@
          *    ###########  two-option   ##############
          */
         $scope.addTwoOptionQuestion = function () {
-            // add object to array
-            $scope.twOptArry.push({
-                twOptionQue: $scope.twOptionQue,
-                option1: $scope.option1,
-                option2: $scope.option2
-            });
-            // clear text
-            $scope.twOptionQue = "";
-            $scope.option1 = "";
-            $scope.option2 = "";
+            //validation
+            if ($scope.option1 == "" || $scope.option2 == "" || $scope.twOptionQue == "")
+            {
+                alert("all feilds in two Option are required");
+            }   
+            else
+            {
+                // add object to array
+                $scope.twOptArry.push({
+                    twOptionQue: $scope.twOptionQue,
+                    option1: $scope.option1,
+                    option2: $scope.option2
+                });
+                // clear text
+                $scope.twOptionQue = "";
+                $scope.option1 = "";
+                $scope.option2 = "";
+            }
         };// end of two-option section 
 
-         /*          
-        * ##########   Multiple Choice Section  ########         
-        */
+        /*          
+       * ##########   Multiple Choice Section  ########         
+       */
         $scope.addOption = function () {
             $scope.mulOptArry.push("");
         }
@@ -59,17 +71,21 @@
             $scope.mulQue = "";
             $scope.mulOptArry = [];
         }//  end of multiple choice section 
-     /*
-      *  ###########  Short Answer   ##############
-      */
+        /*
+         *  ###########  Short Answer   ##############
+         */
         $scope.addShortAnswer = function () {
+            //validation 
+            if ($scope.shortAnswer=="") {
+                alert(" feild in shortAnswer is required");
+            }
             $scope.shortAnswerArry.push($scope.shortAnswer);
             $scope.shortAnswer = "";
         }//  end of Short Answer section 
 
         $scope.save = function () {
             if (!$scope.surveyName || $scope.surveyName.length < 1) {
-               
+
             }
             //new survey object
             var survey = new Surveys({
@@ -79,7 +95,7 @@
                 username: $scope.username,
                 twoOption: $scope.twOptArry,
                 multipleChoice: $scope.mulQueArry,
-                shortAnswer:$scope.shortAnswerArry
+                shortAnswer: $scope.shortAnswerArry
             });
 
             //save into db
