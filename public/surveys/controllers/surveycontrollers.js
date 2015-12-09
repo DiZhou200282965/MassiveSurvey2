@@ -8,8 +8,8 @@
     app.controller('SurveyController', ['$scope', 'Surveys', function ($scope, Surveys) {
         
         $scope.twOptArry = [];
-        //$scope.mulQueArry = [];
-        //$scope.mulOptArry = ["option1","optasdfn2"];
+        $scope.mulQueArry = [];
+        $scope.mulOptArry = [];
         $scope.shortAnswerArry = [];
         $scope.editing = [];
         $scope.username = '';
@@ -34,37 +34,37 @@
         $scope.addTwoOptionQuestion = function () {
             // add object to array
             $scope.twOptArry.push({
-                twOptionQuestion: $scope.twOptionQuestion,
+                twOptionQue: $scope.twOptionQue,
                 option1: $scope.option1,
                 option2: $scope.option2
             });
             // clear text
-            $scope.twOptionQuestion = "";
+            $scope.twOptionQue = "";
             $scope.option1 = "";
             $scope.option2 = "";
         };// end of two-option section 
 
          /*          
-        //* ##########   Multiple Choice Section  ########         
-        //*/
-        //$scope.addMulOption = function () {
-        //    $scope.mulOptArry.push(" ");
-        //}
-        
-        //$scope.addMultipleOptionQuestion = function () {
+        * ##########   Multiple Choice Section  ########         
+        */
+        $scope.addOption = function () {
+            $scope.mulOptArry.push("");
+        }
+        $scope.addMultipleOptionQuestion = function () {
 
-        //    $scope.mulQueArry.push({
-        //        mulQue: $scope.mulQue,
-        //        mulOpt: $scope.mulOptArry
-        //    });
-        //    $scope.mulQue = "";
-        //    $scope.mulOptArry = [];
-        //}//  end of multiple choice section 
+            $scope.mulQueArry.push({
+                mulQue: $scope.mulQue,
+                mulOpt: $scope.mulOptArry
+            });
+            $scope.mulQue = "";
+            $scope.mulOptArry = [];
+        }//  end of multiple choice section 
      /*
       *  ###########  Short Answer   ##############
       */
         $scope.addShortAnswer = function () {
             $scope.shortAnswerArry.push($scope.shortAnswer);
+            $scope.shortAnswer = "";
         }//  end of Short Answer section 
 
         $scope.save = function () {
@@ -78,7 +78,7 @@
                 completed: false,
                 username: $scope.username,
                 twoOption: $scope.twOptArry,
-                //multipleQuestion: $scope.mulQueArry
+                multipleChoice: $scope.mulQueArry,
                 shortAnswer:$scope.shortAnswerArry
             });
 
@@ -90,6 +90,8 @@
                 $scope.shortAnswer = '';
                 $scope.twOptArry = [];
                 $scope.shortAnswerArry = [];
+                $scope.mulQueArry = [];
+                $scope.mulOptArry = [];
             });
         };
 

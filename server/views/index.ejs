@@ -6,7 +6,7 @@
 	<ul class="list-group">
 		<% for (var i = 0; i < surveys.length; i++) { %>
 		 <li class="list-group-item">
-		 	<a href="/<%= surveys[i]._id %>" title="Take Survey">
+		 	<a href="/takeSurvey/<%= surveys[i]._id %>" title="Take Survey">
 		 		<%= surveys[i].name %>
 			</a>
 		 	<br />

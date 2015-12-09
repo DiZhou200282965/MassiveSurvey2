@@ -27,31 +27,30 @@ router.get('/', function(req, res, next) {
             res.render('index', {
                 title: 'Massive Survey',
                 displayName: req.user ? req.user.displayName : '',
-                surveys: surveys
+                surveys: surveys              
             });         
         }
     });
 });
 
-
-// *********************ROUTER ISSUE*********************
 //render respondSurvey page
-// router.get('/:id', function(req, res, next) {
-//     var id = req.params.id;
-//     Survey.findById(id, function(err, Survey) {
-//         if (err) {
-//             console.log(err);
-//             res.end(err);
-//         }
-//         else {
-//             res.render('surveys/respondSurvey', {
-//                 title: "Take Survey",
-//                 displayName: req.user ? req.user.displayName : '',
-//                 survey: Survey
-//             });
-//         }
-//     }); 
-// });
+ router.get('/takeSurvey/:id', function(req, res, next) {
+     var id = req.params.id;
+     Survey.findById(id, function(err, Survey) {
+         if (err) {
+             console.log(err);
+             res.end(err);
+         }
+         else {
+             console.log("length of Mul  "+Survey.multipleChoice.length+"  length ofTwo  "+Survey.twoOption.length+"  length of short  "+Survey.shortAnswer.length);
+             res.render('surveys/respondSurvey', {
+                 title: "Take Survey",
+                 displayName: req.user ? req.user.displayName : '',
+                 survey: Survey,               
+             });
+         }
+     }); 
+ });
 
 /* GET survey list page. */
 router.get('/mySurvey', requireAuth, function(req, res, next) {

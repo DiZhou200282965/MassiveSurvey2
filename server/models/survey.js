@@ -13,7 +13,7 @@ var SurveySchema = new Schema(
         username: String,
         twoOption:
         [{
-            twOptionQuestion: String,
+            twOptionQue: String,
             option1: String,
             option2: String
         }],
