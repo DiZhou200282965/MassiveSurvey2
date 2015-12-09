@@ -14,6 +14,7 @@ function requireAuth(req, res, next){
   next();
 }
 
+
 /* READ Surveys */
 router.get('/', requireAuth, function(req, res, next) {
   Survey.find(function(err,surveys){
@@ -21,7 +22,6 @@ router.get('/', requireAuth, function(req, res, next) {
       res.json(surveys);
   });
 });
-
 
 
 

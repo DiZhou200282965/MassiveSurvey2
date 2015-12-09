@@ -3,6 +3,8 @@ var router = express.Router();
 var passport = require('passport');
 
 var User = require('../models/user');
+var Survey = require('../models/survey.js');
+
 
 /* check if user is authenticatd */
 function requireAuth(req, res, next){
@@ -12,11 +14,32 @@ function requireAuth(req, res, next){
   next();
 }
 
-/* Render home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {
-        title: 'Home',
-        displayName: req.user ? req.user.displayName : ''
+/* Render home page - survey list. */
+// router.get('/', function (req, res, next) {
+//     Article.find(function(err, surveys) {
+//     res.render('index', {
+//         title: 'Massive Survey',
+        
+//         surveys: surveys
+//     });
+// });
+router.get('/', function(req, res, next) {
+    //use the Ariticle model to query the Articles collection
+    Survey.find(function(err, surveys) {
+        if (err) 
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // no error, we found a list of surveys
+            res.render('index', {
+                title: 'Massive Survey',
+                displayName: req.user ? req.user.displayName : '',
+                surveys: surveys
+            });         
+        }
     });
 });
 
