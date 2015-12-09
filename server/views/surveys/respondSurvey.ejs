@@ -1,0 +1,40 @@
+<% include ../partials/header.ejs %>
+
+
+<main class="container">
+    <h1><%= survey.name %></h1>
+
+    <form method="post">
+        <fieldset class="form-group">
+            <label for="title" class="col-sm-2">Category: <%= survey.category %></label>
+        </fieldset>
+        
+        <ul class="list-group">
+            <% for (var i = 0; i < survey.twoOption.length; i++) { %>
+             <li class="list-group-item">
+                <fieldset class="form-group">
+                    <label for="title" class="col-sm-2">Question <%= survey.twoOption[i]._id %>: <%= survey.twoOption[i].twOptionQuestion %></label>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="radio" name="option1" value="option1"><%= survey.twoOption[i].option1 %><br>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="radio" name="option2" value="option2"><%= survey.twoOption[i].option2 %><br>
+                </fieldset>
+             </li>
+            <% } %>
+        </ul>
+        </fieldset>
+
+        <button type="submit" class="col-sm-offset-2 btn btn-success">Submit</button>
+
+        <a href="/surveys/cancel/<%= survey._id %>" title="cancel" onclick="return ">
+            <button type="button" class="btn btn-danger">Cancel</button>
+        </a>
+    </form>
+</main>
+
+
+<% include ../partials/boot.ejs %>
+<% include ../partials/footer.ejs %>
+

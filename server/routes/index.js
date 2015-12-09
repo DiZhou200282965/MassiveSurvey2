@@ -32,10 +32,27 @@ router.get('/', function(req, res, next) {
         }
     });
 });
+//render respondSurvey page
+router.get('/:id', function(req, res, next) {
+    var id = req.params.id;
+    Survey.findById(id, function(err, Survey) {
+        if (err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {
+            res.render('surveys/respondSurvey', {
+                title: "Take Survey",
+                displayName: req.user ? req.user.displayName : '',
+                survey: Survey
+            });
+        }
+    }); 
+});
 
 /* GET survey list page. */
 router.get('/mySurvey', requireAuth, function(req, res, next) {
-  res.render('surveys/index', { 
+  res.render('surveys/index.ejs', { 
       title: 'My Survey List',
       displayName: req.user ? req.user.displayName : '',
       username: req.user ? req.user.username : '' 
