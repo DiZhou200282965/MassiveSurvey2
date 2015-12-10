@@ -8,15 +8,17 @@ var SurveyAnswerSchema = new Schema(
     {
         // surveyId: String,
         twOptionAns:
-        [String],
+        [{
+            twoOptionAns: String
+        }],
         // multipleChoiceAns:
         // [{
-        //     mulQueId: Number,
+  
         //     mulOptAns: String
         // }],
         // shortAnswer:
         // [{
-        //     shrtAnsId: Number,
+     
         //     shrtAns: String
         // }],
         submitted_at:

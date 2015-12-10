@@ -71,13 +71,16 @@ router.post('/takeSurvey/:id', function(req, res, next) {
     //          }]
     //      });
     // var twOptions = Array.prototype.slice.call(req.body.twoOption);
+    console.log(req.body.test);
     var arry=[];
     var tempId;
     for (var i = 0; i < tempSurvey.twoOption.length; i++) {
         tempId = tempSurvey.twoOption[i]._id;
-        arry.push(req.body.tempId);
+        console.log("tempId:" + tempId);
+        console.log(req.body.tempId);
+        arry.push({twoOptionAns: req.body.tempId});
     }
-   
+    
     SurbeyAns.create({
         // surveyId: req.params.id,
         twOptionAns:     arry   
@@ -113,7 +116,14 @@ router.get('/mySurvey', requireAuth, function(req, res, next) {
       username: req.user ? req.user.username : '' 
   });
 });
-
+/*  */
+router.get('/mySurvey/create', requireAuth, function (req, res, next) {
+    res.render('surveys/create/index.ejs', {
+        title: 'My Survey List',
+        displayName: req.user ? req.user.displayName : '',
+        username: req.user ? req.user.username : ''
+    });
+});
 /* Render Login page. */
 router.get('/login', function (req, res, next) {
     if (!req.user) {
