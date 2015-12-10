@@ -77,13 +77,14 @@ router.post('/takeSurvey/:id', function(req, res, next) {
     for (var i = 0; i < tempSurvey.twoOption.length; i++) {
         tempId = tempSurvey.twoOption[i]._id;
         console.log("tempId:" + tempId);
+        console.log(req.body.test);
         console.log(req.body.tempId);
         arry.push({twoOptionAns: req.body.tempId});
     }
     
     SurbeyAns.create({
         // surveyId: req.params.id,
-        twOptionAns:     arry   
+        twOptionAns:   arry   
        
         
         // multipleChoiceAns:
