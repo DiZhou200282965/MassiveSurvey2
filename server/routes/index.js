@@ -51,6 +51,52 @@ router.get('/', function(req, res, next) {
          }
      }); 
  });
+// submit survey answers
+router.post('/takeSurvey/:id', function(req, res, next) {
+    // var twOptionAnss = Array.prototype.slice.call(req.body.twOptionAns);
+    // twOptionAnss.forEach(function (twOptionAns) {
+    //   console.log(
+    //     'ObjectId' + twOptionAns.id,
+    //     'Message' + twOptionAns.twOptAns
+    //   );
+    // });
+
+    // twOptionAns.forEach(function (twOptionAns){
+    //         twOptionAns:        
+    //         [{
+    //             twOptId: twOptionAns[i]._id,
+    //             twOptAns: twOptionAns[i].twOptAns
+    //          }]
+    //      });
+    // var twOptions = Array.prototype.slice.call(req.body.twoOption);
+    Survey.create( {
+        // surveyId: req.params.id,
+        twOptionAns:        
+        [{
+            twOptAns: survey.twoOption[i]._id
+         }]
+        
+        // multipleChoiceAns:
+        // [{
+        //     mulQueId: req.body.,
+        //     mulOptAns: req.body.
+        // }],
+        // shortAnswer:
+        // [{
+        //     shrtAnsId: req.body.,
+        //     shrtAns: req.body.
+        // }]        
+    }, function(err, Survey) {
+        if (err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {
+            res.redirect('/');//after submission
+        }
+    });
+});
+
 
 /* GET survey list page. */
 router.get('/mySurvey', requireAuth, function(req, res, next) {
