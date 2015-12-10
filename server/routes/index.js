@@ -4,7 +4,8 @@ var passport = require('passport');
 
 var User = require('../models/user');
 var Survey = require('../models/survey.js');
-
+var SurbeyAns = require('../models/surveyanswer.js');
+var tempSurvey;
 
 /* check if user is authenticatd */
 function requireAuth(req, res, next){
@@ -48,9 +49,61 @@ router.get('/', function(req, res, next) {
                  displayName: req.user ? req.user.displayName : '',
                  survey: Survey,               
              });
+             tempSurvey = Survey;
          }
      }); 
  });
+// submit survey answers
+router.post('/takeSurvey/:id', function(req, res, next) {
+    // var twOptionAnss = Array.prototype.slice.call(req.body.twOptionAns);
+    // twOptionAnss.forEach(function (twOptionAns) {
+    //   console.log(
+    //     'ObjectId' + twOptionAns.id,
+    //     'Message' + twOptionAns.twOptAns
+    //   );
+    // });
+
+    // twOptionAns.forEach(function (twOptionAns){
+    //         twOptionAns:        
+    //         [{
+    //             twOptId: twOptionAns[i]._id,
+    //             twOptAns: twOptionAns[i].twOptAns
+    //          }]
+    //      });
+    // var twOptions = Array.prototype.slice.call(req.body.twoOption);
+    var arry=[];
+    var tempId;
+    for (var i = 0; i < tempSurvey.twoOption.length; i++) {
+        tempId = tempSurvey.twoOption[i]._id;
+        arry.push(req.body.tempId);
+    }
+   
+    SurbeyAns.create({
+        // surveyId: req.params.id,
+        twOptionAns:     arry   
+       
+        
+        // multipleChoiceAns:
+        // [{
+        //     mulQueId: req.body.,
+        //     mulOptAns: req.body.
+        // }],
+        // shortAnswer:
+        // [{
+        //     shrtAnsId: req.body.,
+        //     shrtAns: req.body.
+        // }]        
+    }, function(err, Survey) {
+        if (err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {
+            res.redirect('/');//after submission
+        }
+    });
+});
+
 
 /* GET survey list page. */
 router.get('/mySurvey', requireAuth, function(req, res, next) {
