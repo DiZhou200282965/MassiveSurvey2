@@ -37,12 +37,10 @@
          */
         $scope.addTwoOptionQuestion = function () {
             //validation
-            if ($scope.option1 == "" || $scope.option2 == "" || $scope.twOptionQue == "")
-            {
+            if ($scope.option1 == "" || $scope.option2 == "" || $scope.twOptionQue == "") {
                 alert("all feilds in two Option are required");
-            }   
-            else
-            {
+            }
+            else {
                 // add object to array
                 $scope.twOptArry.push({
                     twOptionQue: $scope.twOptionQue,
@@ -76,7 +74,7 @@
          */
         $scope.addShortAnswer = function () {
             //validation 
-            if ($scope.shortAnswer=="") {
+            if ($scope.shortAnswer == "") {
                 alert(" feild in shortAnswer is required");
             }
             $scope.shortAnswerArry.push($scope.shortAnswer);
@@ -155,7 +153,57 @@
 
     app.controller('SurveyDetailCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
         function ($scope, $routeParams, Surveys, $location) {
+            $scope.mulOptArry = [];
             $scope.survey = Surveys.get({ id: $routeParams.id });
+
+             /*
+              *    ###########  two-option   ##############
+              */
+            $scope.addTwoOptionQuestion = function () {
+                //validation
+                if ($scope.option1 == "" || $scope.option2 == "" || $scope.twOptionQue == "") {
+                    alert("all feilds in two Option are required");
+                }
+                else {
+                    // add object to array
+                    $scope.survey.twoOption.push({
+                        twOptionQue: $scope.twOptionQue,
+                        option1: $scope.option1,
+                        option2: $scope.option2
+                    });
+                    // clear text
+                    $scope.twOptionQue = "";
+                    $scope.option1 = "";
+                    $scope.option2 = "";
+                }
+            };// end of two-option section 
+            /*          
+             * ##########   Multiple Choice Section  ########         
+             */
+            $scope.addOption = function () {
+                $scope.mulOptArry.push("");
+            }
+            $scope.addMultipleOptionQuestion = function () {
+
+                $scope.survey.multipleChoice.push({
+                    mulQue: $scope.mulQue,
+                    mulOpt: $scope.mulOptArry
+                });
+                $scope.mulQue = "";
+                $scope.mulOptArry = [];
+            }//  end of multiple choice section 
+              /*
+               *  ###########  Short Answer   ##############
+               */
+            $scope.addShortAnswer = function () {
+                //validation 
+                if ($scope.shortAnswer == "") {
+                    alert(" feild in shortAnswer is required");
+                }
+                $scope.survey.shortAnswer.push($scope.shortAnswer);
+                $scope.shortAnswer = "";
+            }//  end of Short Answer section 
+
             $scope.update = function () {
                 Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
                     $location.url('/');
@@ -172,10 +220,7 @@
         }]);
 
 
-    app.controller('createSurveyCtrl', ['$scope', '$routeParams', 'Surveys', '$location',
-    function ($scope, $routeParams, Surveys, $location) {
 
-    }]);
 
 
 })(); //end of closure

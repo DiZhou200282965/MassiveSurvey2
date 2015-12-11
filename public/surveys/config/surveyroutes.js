@@ -12,10 +12,5 @@
                 templateUrl: '/surveyDetails.html',
                 controller: 'SurveyDetailCtrl'
             })
-          .when('/create', {
-              templateUrl: '/createSurvey.html',
-              controller: 'createSurveyCtrl'
-          });
-
         }]);
 })(); // end of closure

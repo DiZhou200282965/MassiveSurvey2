@@ -26,6 +26,31 @@
             </li>
             <% } %>
         </ul>
+        <!-- Multiple Choice -->
+         <div>
+    <% for(var i=0; i<survey.multipleChoice.length; i++) { %>
+        <div>
+            <label>Question<%=survey.twoOption.length+i+1 %>:<%= survey.multipleChoice[i].mulQue %></label>
+            <% for( var k=0; k<survey.multipleChoice[i].mulOpt.length; k++) { %>
+                <div>
+                    <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k ]%>"><%= survey.multipleChoice[i].mulOpt[k]%><br />
+                </div>
+                <% } %>
+        </div>
+    <% } %>
+    </div> 
+        <!-- Short Answer -->
+       
+    <% for(var i=0;i<survey.shortAnswer.length;i++) { %>
+        <div>
+            <label>Question<%=survey.twoOption.length+survey.multipleChoice.length+i+1 %>:<%=survey.shortAnswer[i] %></label>
+            <div>
+                <textarea rows="3" name="<%= i %>" placeholder="here to say..."></textarea>
+            </div>
+        </div>
+    <% } %>
+
+
 
         <!-- Submit answers -->
         <button type="submit" class="col-sm-offset-5 btn btn-success">Submit</button>

@@ -61,14 +61,23 @@ router.post('/takeSurvey/:id', function(req, res, next) {
     // loop through the questions, find post value by i and stored into object form then push to array
     for (var i = 0; i < tempSurvey.twoOption.length; i++)
     {       
-        twOptAnsArry.push({twoOptionAns: req.body[tempSurvey.twoOption[i]._id]});
+        twOptAnsArry.push({ twoOptionAns: req.body[tempSurvey.twoOption[i]._id] });
+    }
+    for (var i = 0; i < tempSurvey.multipleChoice.length; i++)
+    {
+        mulAnsArry.push({ mulOptAns: req.body[tempSurvey.multipleChoice[i]._id] })
+    }
+    for (var i = 0; i < tempSurvey.shortAnswer.length; i++) {
+        shorAnsArry.push({ shrtAns: req.body[i] })
     }
 
     // store object into db
     SurbeyAns.create({
         surveyId: req.params.id,
-        twOptionAns: twOptAnsArry   
-          
+        twOptionAns: twOptAnsArry,
+        multipleChoiceAns: mulAnsArry,
+        shortAnswer: shorAnsArry,
+        submitted_at: Date.now()          
     }, function(err, Survey) {
         if (err) {
             console.log(err);
@@ -91,7 +100,7 @@ router.get('/mySurvey', requireAuth, function(req, res, next) {
 });
 /*  */
 router.get('/mySurvey/create', requireAuth, function (req, res, next) {
-    res.render('surveys/create/index.ejs', {
+    res.render('surveys/index.ejs', {
         title: 'My Survey List',
         displayName: req.user ? req.user.displayName : '',
         username: req.user ? req.user.username : ''

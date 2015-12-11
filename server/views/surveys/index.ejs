@@ -53,7 +53,6 @@
             <button type="button" ng-click="save()" class="btn btn-primary">Create</button>
         </div> <!-- panel-body -->
     </div> <!-- panel panel-default -->
-
     <!-- ####move to another page later:   template for adding survey   -->
     <div class="col-xs-6">
 
@@ -115,8 +114,8 @@
                 <legend ng-show="mulQueArry.length">MULTIPLE OPTION</legend>
                 <div ng-repeat="mul in mulQueArry">
                     <label>{{mul.mulQue}}</label>
-                    <div ng-repeat="mulOpt in mul.mulOpt track by $index" >
-                    <input type="radio" ng-model="mul._id" ng-value="mulOpt" >
+                    <div ng-repeat="mulOpt in mul.mulOpt track by $index">
+                        <input type="radio" ng-model="mul._id" ng-value="mulOpt">
                         {{mulOpt }}<br />
                     </div>
                     <div>
@@ -144,21 +143,115 @@
     </div>
 </script>
 
-
+<!-- route survey detail -->
 <script type="text/ng-template" id="/surveyDetails.html">
+
+
     <div class="panel panel-default ">
         <div class="panel-heading">
             <h2 class="panel-title">{{ survey.name }}</h2>
         </div><!-- panel-heading -->
         <div class="panel-body">
-            <h3>complete? <input type="checkbox" ng-model="survey.completed"></h3>
+
             <h3>Question:</h3>
-            <textarea ng-model="survey.multipleChoice.question" class="form-control"></textarea>
-            <br>
-            <h3>Answers:</h3>
-            <div ng-repeat="answer in survey.multipleChoice.answers">
-                <textarea ng-model="survey.multipleChoice.answers[$index]" class="form-control"></textarea>
+
+            <!-- Start of template-->
+            <div class="col-xs-4">
+                <h4>Two Option</h4>
+                <!-- Add Two-Option Questions -->
+                <div>
+                    <input type="text" ng-model="twOptionQue" placeholder="Enter the question here" />
+                </div>
+                <input type="text" ng-model="option1" placeholder="Enter option1 here" />
+                <input type="text" ng-model="option2" placeholder="Enter option2 here" />
+                <div>
+                    <button type="button" ng-click="addTwoOptionQuestion()" class="btn btn-primary">Add</button>
+                </div>
+                <hr />
+                <h4>Multiple Choice</h4>
+                <!-- Add Multiple Choice Questions -->
+                <div>
+                    <input type="text" ng-model="mulQue" placeholder="Enter the question here" />
+                </div>
+                <div ng-repeat="mulOpt in mulOptArry track by $index">
+                    <input type="text" ng-model="mulOptArry[$index]" placeholder="Enter option here" />
+                    <button type="button" ng-click="mulOptArry.splice($index, 1)" class="btn btn-primary">remove</button>
+                </div>
+                <div>
+                    <button type="button" ng-click="addOption()" class="btn btn-primary">add a option</button>
+                </div>
+                <div>
+                    <button type="button" ng-click="addMultipleOptionQuestion()" class="btn btn-primary">Add</button>
+                </div>
+
+                <h4>Short Answer</h4>
+                <!-- Add Short Answer Questions -->
+                <div>
+                    <input type="text" ng-model="shortAnswer" placeholder="Enter the question here" />
+                </div>
+                <div>
+                    <button type="button" ng-click="addShortAnswer()" class="btn btn-primary">Add</button>
+                </div>
+                <hr />
             </div>
+            <!-- end of template-->
+            <!-- display the survey-->
+            <div class="col-xs-8">
+                <form>
+                    <fieldset>
+                        <legend ng-show="survey.twoOption.length">TWO OPTION</legend>
+                        <div ng-repeat="twOpt in survey.twoOption">
+                            <label>{{twOpt.twOptionQue}}</label>
+                            <div>
+                                <input type="radio" ng-model="twOpt.id" ng-value="twOpt.option1">{{twOpt.option1}}<br>
+                                <input type="radio" ng-model="twOpt.id" ng-value="twOpt.option2">{{twOpt.option2}}
+                            </div>
+                            <div>
+                                <button type="button" ng-click="survey.twoOption.splice($index, 1)" class="btn btn-primary">remove</button>
+                            </div>
+                            <hr />
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend ng-show="survey.multipleChoice.length">MULTIPLE OPTION</legend>
+                        <div ng-repeat="mul in survey.multipleChoice">
+                            <label>{{mul.mulQue}}</label>
+                            <div ng-repeat="mulOpt in mul.mulOpt track by $index">
+                                <input type="radio" ng-model="mul._id" ng-value="mulOpt">
+                                {{mulOpt }}<br />
+                            </div>
+                            <div>
+                                <button type="button" ng-click="survey.multipleChoice.splice($index, 1)" class="btn btn-primary">remove</button>
+                            </div>
+                            <hr />
+                        </div>
+                    </fieldset>
+
+                    <!-- ! 添加同名问题时报错-->
+                    <fieldset>
+                        <legend ng-show="survey.shortAnswer.length">SHORT ANSWER</legend>
+                        <div ng-repeat="i in survey.shortAnswer">
+                            <label>{{i}}</label>
+                            <div>
+                                <textarea rows="3" placeholder="here to say..."></textarea>
+                            </div>
+                            <div>
+                                <button type="button" ng-click="survey.shortAnswer.splice($index, 1)" class="btn btn-primary">remove</button>
+                            </div>
+                            <hr />
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
             <div class="btn-group">
                 <button type="button" ng-click="update()" class="btn btn-warning">update</button>
                 <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
@@ -167,15 +260,7 @@
         </div> <!-- panel-body -->
     </div> <!-- panel panel-default -->
 </script>
-<script type="text/ng-template" id="/createSurvey.html">
 
-                <button type="button" ng-click="update()" class="btn btn-warning">update</button>
-                <button type="button" ng-click="remove()" class="btn btn-danger">remove</button>
-                <button type="button" ng-click="cancel()" class="btn btn-default">cancel</button>
-            </div> <!-- btn-group -->
-        </div> <!-- panel-body -->
-    </div> <!-- panel panel-default -->
-</script>
     <% include ../partials/boot.ejs %>
     <% include ../partials/nglib.ejs %>
     <% include ../partials/footer.ejs %>
