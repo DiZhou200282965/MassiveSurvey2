@@ -21,19 +21,11 @@
                     <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option1 %>"><%= survey.twoOption[i].option1 %><br>
                 </fieldset>
                 <fieldset class="form-group">
-                    <input type="radio" name="<%= survey.twoOption[i].twOptionQue %>" value="<%= survey.twoOption[i].option2 %>"><%= survey.twoOption[i].option2 %><br>
+                    <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option2 %>"><%= survey.twoOption[i].option2 %><br>
                 </fieldset>
             </li>
             <% } %>
         </ul>
-        <!-- test block -->
-        <fieldset class="form-group">
-            <input type="radio" name="5669ce4e0752572c2d0f1205" value="female">female<br>
-        </fieldset>
-        <fieldset class="form-group">
-            <input type="radio" name="5669ce4e0752572c2d0f1205" value="male">male<br>
-        </fieldset>
-        <!-- test block -->
 
         <!-- Submit answers -->
         <button type="submit" class="col-sm-offset-5 btn btn-success">Submit</button>

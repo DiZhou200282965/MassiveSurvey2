@@ -6,21 +6,20 @@ var Schema = mongoose.Schema;
 
 var SurveyAnswerSchema = new Schema(
     {
-        // surveyId: String,
+         surveyId: String,
         twOptionAns:
         [{
             twoOptionAns: String
         }],
-        // multipleChoiceAns:
-        // [{
-  
-        //     mulOptAns: String
-        // }],
-        // shortAnswer:
-        // [{
+         multipleChoiceAns:
+         [{  
+            mulOptAns: String
+         }],
+         shortAnswer:
+         [{
      
-        //     shrtAns: String
-        // }],
+             shrtAns: String
+         }],
         submitted_at:
         {
                 type: Date, default: Date.now

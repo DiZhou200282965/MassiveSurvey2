@@ -42,61 +42,33 @@ router.get('/', function(req, res, next) {
              console.log(err);
              res.end(err);
          }
-         else {
-             console.log("length of Mul  "+Survey.multipleChoice.length+"  length ofTwo  "+Survey.twoOption.length+"  length of short  "+Survey.shortAnswer.length);
+         else {            
              res.render('surveys/respondSurvey', {
                  title: "Take Survey",
                  displayName: req.user ? req.user.displayName : '',
                  survey: Survey,               
              });
-             tempSurvey = Survey;
+             tempSurvey = Survey; //take the survey object
          }
      }); 
  });
 // submit survey answers
 router.post('/takeSurvey/:id', function(req, res, next) {
-    // var twOptionAnss = Array.prototype.slice.call(req.body.twOptionAns);
-    // twOptionAnss.forEach(function (twOptionAns) {
-    //   console.log(
-    //     'ObjectId' + twOptionAns.id,
-    //     'Message' + twOptionAns.twOptAns
-    //   );
-    // });
 
-    // twOptionAns.forEach(function (twOptionAns){
-    //         twOptionAns:        
-    //         [{
-    //             twOptId: twOptionAns[i]._id,
-    //             twOptAns: twOptionAns[i].twOptAns
-    //          }]
-    //      });
-    // var twOptions = Array.prototype.slice.call(req.body.twoOption);
-    console.log(req.body.test);
-    var arry=[];
-    var tempId;
-    for (var i = 0; i < tempSurvey.twoOption.length; i++) {
-        tempId = tempSurvey.twoOption[i]._id;
-        console.log("tempId:" + tempId);
-        console.log(req.body.test);
-        console.log(req.body.tempId);
-        arry.push({twoOptionAns: req.body.tempId});
+    var twOptAnsArry = [];
+    var mulAnsArry = [];
+    var shorAnsArry = [];
+    // loop through the questions, find post value by i and stored into object form then push to array
+    for (var i = 0; i < tempSurvey.twoOption.length; i++)
+    {       
+        twOptAnsArry.push({twoOptionAns: req.body[tempSurvey.twoOption[i]._id]});
     }
-    
+
+    // store object into db
     SurbeyAns.create({
-        // surveyId: req.params.id,
-        twOptionAns:   arry   
-       
-        
-        // multipleChoiceAns:
-        // [{
-        //     mulQueId: req.body.,
-        //     mulOptAns: req.body.
-        // }],
-        // shortAnswer:
-        // [{
-        //     shrtAnsId: req.body.,
-        //     shrtAns: req.body.
-        // }]        
+        surveyId: req.params.id,
+        twOptionAns: twOptAnsArry   
+          
     }, function(err, Survey) {
         if (err) {
             console.log(err);
