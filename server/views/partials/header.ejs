@@ -29,45 +29,54 @@
         </button>
         <a class="navbar-brand" rel="home" href="#" title="Massive Survey">
             <img style="max-width:100px; margin-top: -7px;" 
-                 src="http://i359.photobucket.com/albums/oo33/Chang_Liu/logo_zpslzwsatdq.jpg" alt="Massive Survey">
+                 src="/images/logo.jpg" alt="Massive Survey">
         </a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          
           <% if(title == "Massive Survey" ) { %>
-            <li class="active">
-          <% } else { %>
-          <li>
-            <% } %>
-            <a href="/">Home</a></li>
+            <li class="active"> <% } else { %> <li> <% } %>
+            <a href="/">Home</a>
+            </li>
+
           <li role="separator" class="divider"></li>
+          
+          <!-- If a registered user is logged in -->
           <% if (displayName) { %>
+
+            <% if(title == "Analysis" ) { %>
+            <li class="active"> <% } else { %> <li> <% } %>
+              <a href="/analysis">Analysis</a>
+            </li>
+
             <% if(title == "Users" ) { %>
-            <li class="active">
-              <% } else { %>
-            <li>
-              <% } %>
-              <a href="/users">Users</a></li>
-            <!-- Needs to build user profile page down here -->
-            <li>
+              <li class="active"> <% } else { %> <li> <% } %>
               <a href="/users">Hello, <%= displayName %></a>
             </li>
+
             <li><a href="/logout">Logout</a></li>
-            <% } else { %>
-              <% if(title == "Register" ) { %>
-            <li class="active">
-            <% } else { %>
-            <li>
-            <% } %>
-                <a href="/register">Register</a></li>
-              <% if(title == "Login" ) { %>
-            <li class="active">
-            <% } else { %>
-            <li>
-            <% } %>
-                <a href="/login">Login</a></li>
-              <% } %>
-            <li><a href="/mySurvey">My Survey</a></li>
+            
+          <!-- For anonymous user -->
+          <% } else { %>
+            
+            <% if(title == "Register" ) { %>
+            <li class="active"> <% } else { %> <li> <% } %>
+              <a href="/register">Register</a>
+            </li>
+
+            <% if(title == "Login" ) { %>
+            <li class="active"> <% } else { %> <li> <% } %>
+              <a href="/login">Login</a>
+            </li>
+
+          <% } %>
+
+          <% if(title == "My Survey List" ) { %>
+          <li class="active"> <% } else { %> <li> <% } %>
+            <a href="/mySurvey">My Survey</a>
+          </li>
+
         </ul> <!-- nav navbar-nav navbar-right -->
       </div> <!-- collapse navbar-collapse -->
     </div> <!-- container-fluid -->

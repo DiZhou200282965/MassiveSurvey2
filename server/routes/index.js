@@ -5,7 +5,7 @@ var passport = require('passport');
 
 var User = require('../models/user');
 var Survey = require('../models/survey.js');
-var SurbeyAns = require('../models/surveyanswer.js');
+var SurveyAns = require('../models/surveyanswer.js');
 var tempSurvey;
 
 /* check if user is authenticatd */
@@ -73,7 +73,7 @@ router.post('/takeSurvey/:id', function(req, res, next) {
     }
 
     // store object into db
-    SurbeyAns.create({
+    SurveyAns.create({
         surveyId: req.params.id,
         twOptionAns: twOptAnsArry,
         multipleChoiceAns: mulAnsArry,
@@ -155,6 +155,15 @@ router.post('/register', passport.authenticate('local-registration', {
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
+});
+
+/* GET analysis page. */
+router.get('/analysis', requireAuth, function(req, res, next) {
+  res.render('analysis/index.ejs', { 
+      title: 'Analysis',
+      displayName: req.user ? req.user.displayName : '',
+      username: req.user ? req.user.username : '' 
+  });
 });
 
 module.exports = router;
