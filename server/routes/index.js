@@ -78,7 +78,7 @@ router.post('/takeSurvey/:id', function(req, res, next) {
         twOptionAns: twOptAnsArry,
         multipleChoiceAns: mulAnsArry,
         shortAnswer: shorAnsArry,
-        submitted_at: Date.now()          
+        submitted_at: Date.now()
     }, function(err, Survey) {
         if (err) {
             console.log(err);
