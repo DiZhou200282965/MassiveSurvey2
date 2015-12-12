@@ -90,7 +90,6 @@ router.post('/takeSurvey/:id', function(req, res, next) {
     });
 });
 
-
 /* GET survey list page. */
 router.get('/mySurvey', requireAuth, function(req, res, next) {
   res.render('surveys/index.ejs', { 
@@ -157,13 +156,5 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
-/* GET analysis page. */
-router.get('/analysis', requireAuth, function(req, res, next) {
-  res.render('analysis/index.ejs', { 
-      title: 'Analysis',
-      displayName: req.user ? req.user.displayName : '',
-      username: req.user ? req.user.username : '' 
-  });
-});
 
 module.exports = router;

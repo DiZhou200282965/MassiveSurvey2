@@ -1,4 +1,19 @@
 <% include ../partials/header.ejs %>
-<p>Analysis</p>
+
+
+<main class="container">
+	<h1>Analysis for Your Surveys</h1>
+	<ul class="list-group">
+		<% for (var i = 0; i < surveys.length; i++) { %>
+		 <li class="list-group-item">
+		 	<a href="/analysis/<%= surveys[i]._id %>" title="See Analysis">
+		 		<%= surveys[i].name %>
+			</a>
+		 	<br />
+		 </li>
+		<% } %>
+	</ul>
+</main>
+
 <% include ../partials/boot.ejs %>
 <% include ../partials/footer.ejs %>

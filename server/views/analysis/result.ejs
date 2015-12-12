@@ -1,0 +1,32 @@
+<% include ../partials/header.ejs %>
+
+
+<main class="container">
+	<h1>Analysis Result for <%= surveys.name %></h1>
+	<form method="get">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<fieldset class="form-group">
+					<label for="title" class="col-sm-6">Number of respondents: <%= surveyanswers.length+1 %></label>
+				</fieldset>
+				<!-- Loop through answer table -->
+				<% for (var i = 0; i < surveyanswers.length; i++) { %>
+					<!-- loop through two option questions -->
+					<% for (var j = 0; j < surveyanswers[i].twOptionAns.length; j++) { %>
+						<h4>Two Option Question: <%= j+1 %></h4>
+						<!-- calculating option choice -->
+							<label>TEST<%= %></label>
+							<fieldset class="form-group">
+								<label for="title" class="col-sm-6">twOptionAns: <%= surveyanswers[i].twOptionAns[j].twoOptionAns %></label>
+							</fieldset>
+					<% } %>
+				<% } %>
+			</li>
+		</ul>
+	</form>
+
+	
+</main>
+
+<% include ../partials/boot.ejs %>
+<% include ../partials/footer.ejs %>

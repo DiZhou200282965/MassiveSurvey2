@@ -22,7 +22,7 @@ mongoose.connection.on('error', function() {
 var surveys = require('./server/routes/surveys.js');
 var routes = require('./server/routes/index');
 var users = require('./server/routes/users');
-// var businesscontacts = require(('./routes/businesscontacts'));
+var analysis = require('./server/routes/analysis');
 
 var app = express();
 
@@ -53,6 +53,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/surveys', surveys);
+app.use('/analysis', analysis);
 
 // app.use('/businesscontacts', businesscontacts);
 
