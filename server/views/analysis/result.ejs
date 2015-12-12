@@ -2,27 +2,70 @@
 
 
 <main class="container">
-	<h1>Analysis Result for </h1>
+	<h1>Analysis Result for <%= tempSurvey.name %></h1>
 	<form method="get">
 		<ul class="list-group">
-			<li class="list-group-item">
-				<fieldset class="form-group">
-					<label for="title" class="col-sm-6">Number of respondents: <%= surveyanswers.length+1 %></label>
-				</fieldset>
-				<!-- Loop through answer table -->
-				<% for (var i = 0; i < surveyanswers.length; i++) { %>
-					<!-- loop through two option questions -->
-					<% for (var j = 0; j < surveyanswers[i].twOptionAns.length; j++) { %>
-						<h4>Two Option Question: <%= j+1 %></h4>
-						<!-- calculating option choice -->
-							<label>TEST<%= %></label>
-							<fieldset class="form-group">
-								<label for="title" class="col-sm-6">twOptionAns: <%= surveyanswers[i].twOptionAns[j].twoOptionAns %></label>
-							</fieldset>
-					<% } %>
-				<% } %>
-			</li>
-		</ul>
+            <li class="list-group-item ">
+                <fieldset class="form-group" >
+                    <legend>General Information:</legend>
+                    <label for="title">Number of respondents: <%= tempSurveyAnsArry.length %></label><br />
+                    <label>Number of Two Option Questions: <%= tempSurvey.twoOption.length %></label><br />
+                    <label>Number of Multiple Option Questions: <%= tempSurvey.multipleChoice.length %></label><br />
+                    <label>Number of Short Questions: <%= tempSurvey.shortAnswer.length %></label>
+                </fieldset>
+            </li>
+            <li class="list-group-item">
+                <fieldset>
+                    <legend>Question Information:</legend>
+                    <ul class="list-group">
+                        <li>
+                            <h5>Two Option</h5>
+                            <% for (var i = 0; i < tempSurvey.twoOption.length; i++) { %>
+                            <label>Question :<%= (i+1) %><%=tempSurvey.twoOption[i].twOptionQue %></label><br />                           
+                                <label >Option1:<%= tempSurvey.twoOption[i].option1 %></label><label >Percent:<%= opt1Count/tempSurveyAnsArry.length %></label> <br />                           
+                                <label >Option2:<%= tempSurvey.twoOption[i].option2 %></label><label >Percent:<%= (tempSurveyAnsArry.length-opt1Count)/tempSurveyAnsArry.length %></label> <br />                     
+                                <% } %>
+                        </li>
+                        <li>
+                            <h5>Multiple Choice</h5>
+                            <% for (var i = 0; i < tempSurvey.multipleChoice.length; i++) { %>                               
+                            <label>Question :<%= (i+tempSurvey.twoOption.length+1) %><%=tempSurvey.multipleChoice[i].mulQue%></label><br />
+                                <% for (var k = 0; k < tempSurvey.multipleChoice[i].mulOpt.length; k++) { %>
+                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= %></label> <br />  
+                                <% } %>
+                            <% } %>
+                        </li>
+                        <li>
+                            <h5>Short Answer</h5>
+                            <% for (var i = 0; i < tempSurvey.shortAnswer.length; i++) { %>
+                            <label>Question :<%= (i+tempSurvey.twoOption.length+tempSurvey.multipleChoice.length+1) %><%=tempSurvey.shortAnswer[i] %></label><br />
+                                <% for (var k = 0; k < tempSurveyAnsArry.length; k++) { %>
+                                 <label>Answer<%=k+1 %>:<%=tempSurveyAnsArry[k].shortAnswer[i].shrtAns %></label><br />
+                                <% } %>
+                            <% } %>
+                        </li>
+                    </ul>
+
+                </fieldset>
+            </li>
+
+                <!--
+
+                        <% for (var i = 0; i < tempSurveyAnsArry.length; i++) { %>
+
+                            <% for (var j = 0; j < tempSurveyAnsArry[i].twOptionAns.length; j++) { %>
+                                <h4>Two Option Question: <%= j+1 %></h4>
+
+                                    <fieldset class="form-group">
+                                        <label for="title" class="col-sm-6">twOptionAns: <%= tempSurveyAnsArry[i].twOptionAns[j].twoOptionAns %></label>
+                                    </fieldset>
+                            <% } %>
+                        <% } %>
+        -->
+
+
+
+</ul>
 	</form>
 	<a href="javascript:window.print()" class="btn btn-info btn-lg" id="print-button">
 		<span class="glyphicon glyphicon-print"></span> Print 
