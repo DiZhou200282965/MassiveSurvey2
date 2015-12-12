@@ -62,7 +62,10 @@ router.get('/:id', requireAuth, function (req, res, next) {
                     // error handler
                     var flag = false;
                     for (var i = 0; i < tempSurveyAnsArry.length; i++) {
-                        if (tempSurveyAnsArry[i].twOptionAns == undefined || tempSurveyAnsArry[i].multipleChoiceAns == undefined || tempSurveyAnsArry[i].twOptioshortAnswernAns == undefined) {
+                    //    console.log("###1"+tempSurveyAnsArry[i].twOptionAns);
+                    //    console.log("###2" + tempSurveyAnsArry[i].multipleChoiceAns);
+                   //     console.log("###3" + tempSurveyAnsArry[i].shortAnswer);
+                        if (tempSurveyAnsArry[i].twOptionAns === undefined || tempSurveyAnsArry[i].multipleChoiceAns === undefined || tempSurveyAnsArry[i].shortAnswer === undefined) {
                             flag = true;
                         }
                     }// if there is undefiend answer, redirect to home page
