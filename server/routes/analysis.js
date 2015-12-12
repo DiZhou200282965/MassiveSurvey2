@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 var SurveyAnswer = require('../models/surveyanswer.js');
 var Survey = require('../models/survey.js');
-
+var mySurveys;
 /* check if user is authenticatd */
 function requireAuth(req, res, next) {
     if (!req.isAuthenticated()) {
@@ -22,7 +22,8 @@ router.get('/', requireAuth, function (req, res, next) {
             res.end(err);
         }
         else {
-            console.log(surveys.length);
+            //console.log(surveys.length);
+            mySurveys = surveys;
             res.render('analysis/index', {
                 title: 'Analysis',
                 displayName: req.user ? req.user.displayName : '',
@@ -43,52 +44,65 @@ router.get('/:id', requireAuth, function (req, res, next) {
     //  console.log(tempSurveyA.name);
     //################################## modified block ###############
     Survey.findById(id, function (err, survey) {
-        if (err)
-        {
+        if (err) {
             console.log(err);
             res.end(err);
         }
-        else
-        {
-            var tempSurvey = survey;            
-            console.log("###### Name :"+tempSurvey.name); // for test###
+        else {
+            var tempSurvey = survey;
+            //console.log("###### Name :"+tempSurvey.name); // for test###
             SurveyAnswer.find({ surveyId: id }, function (err, surveyAnsArry) {
-                if (err)
-                {
+                if (err) {
                     console.log(err);
                     res.end(err);
                 }
                 else
                 {
                     var tempSurveyAnsArry = surveyAnsArry;
-
-                    //### !!!!如果survey没有人做过，那么tempSurveyAnsArry里面的属性可能为undifined 会导致错误!!!!
-              
-                    console.log("###### tempSurveyAnsArry length :" + tempSurveyAnsArry.length);// for test###
-                    console.log("###### answer :" + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);// for test###
-                    // start of calculation
-                    
-                    // for tow Option
-                    var opt1Count = 0;
-                    for (var i = 0; i < tempSurveyAnsArry.length; i++)
+                    // error handler
+                    var flag = false;
+                    for (var i = 0; i < tempSurveyAnsArry.length; i++) {
+                        if (tempSurveyAnsArry[i].twOptionAns == undefined || tempSurveyAnsArry[i].multipleChoiceAns == undefined || tempSurveyAnsArry[i].twOptioshortAnswernAns == undefined) {
+                            flag = true;
+                        }
+                    }// if there is undefiend answer, redirect to home page
+                    if (flag)
                     {
-                        if (tempSurveyAnsArry[i].twOptionAns[0].twoOptionAns === tempSurvey.twoOption[0].option1)
-                            opt1Count++;               
+                        console.log("no");
+                        res.render('analysis/index', {
+                            title: 'Analysis',
+                            displayName: req.user ? req.user.displayName : '',
+                            surveys: mySurveys
+                        });
                     }
-                    console.log("###### Count :" + opt1Count);// for test###
-                    //end of calculation
-                    res.render('analysis/result', {
-                        title: "Survey Answer Details",
-                        displayName: req.user ? req.user.displayName : '',
-                        tempSurveyAnsArry: tempSurveyAnsArry,
-                        tempSurvey: tempSurvey,
-                        opt1Count: opt1Count,
-                    });
+                    else
+                    {
+                        //console.log("###### tempSurveyAnsArry length :" + tempSurveyAnsArry.length);// for test###
+                        //console.log("###### answer :" + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);// for test###
+                        // start of calculation
+
+                        // for tow Option
+                        var opt1Count = 0;
+                        for (var i = 0; i < tempSurveyAnsArry.length; i++) {
+                            if (tempSurveyAnsArry[i].twOptionAns[0].twoOptionAns === tempSurvey.twoOption[0].option1)
+                                opt1Count++;
+                        }
+                        console.log("###### Count :" + opt1Count);// for test###
+                        //end of calculation
+                        res.render('analysis/result', {
+                            title: "Survey Answer Details",
+                            displayName: req.user ? req.user.displayName : '',
+                            tempSurveyAnsArry: tempSurveyAnsArry,
+                            tempSurvey: tempSurvey,
+                            opt1Count: opt1Count,
+                        });
+                    }
                 }
+
             });// end of surveyAnswer find by ID
         }
     });// end of survey find by ID
-    
+
 });// end of get /:Id
 
 //  var SurveyAnswerA = SurveyAnswer.find({surveyId: id}, function(err, SurveyAnswer) {
