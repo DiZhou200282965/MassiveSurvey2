@@ -16,7 +16,7 @@ function requireAuth(req, res, next){
 
 /* Render Users main page. */
 router.get('/', requireAuth, function (req, res, next) {
-    User.find(function (err, users) {
+    User.find({username:req.user.username},function (err, users) {
         if (err) {
             console.log(err);
             res.end(err);

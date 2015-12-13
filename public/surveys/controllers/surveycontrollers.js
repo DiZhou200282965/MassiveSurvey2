@@ -205,9 +205,13 @@
             }//  end of Short Answer section 
 
             $scope.update = function () {
-                Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
-                    $location.url('/');
-                });
+                var r = confirm("Any change will delete all collected answer, are you still want to update your survey?");
+                if (r == true) { // if user say yes then update the survey 
+                    Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
+                        $location.url('/');
+                    });
+                }
+                          
             };
             $scope.remove = function () {
                 Surveys.remove({ id: $scope.survey._id }, function () {
