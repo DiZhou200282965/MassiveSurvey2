@@ -38,7 +38,7 @@
         $scope.addTwoOptionQuestion = function () {
             //validation
             if ($scope.option1 == "" || $scope.option2 == "" || $scope.twOptionQue == "") {
-                alert("all feilds in two Option are required");
+                alert("all fields in two Option are required");
             }
             else {
                 // add object to array
@@ -75,7 +75,7 @@
         $scope.addShortAnswer = function () {
             //validation 
             if ($scope.shortAnswer == "") {
-                alert(" feild in shortAnswer is required");
+                alert(" field in shortAnswer is required");
             }
             $scope.shortAnswerArry.push($scope.shortAnswer);
             $scope.shortAnswer = "";
@@ -164,7 +164,7 @@
             $scope.addTwoOptionQuestion = function () {
                 //validation
                 if ($scope.option1 == "" || $scope.option2 == "" || $scope.twOptionQue == "") {
-                    alert("all feilds in two Option are required");
+                    alert("all fields in two Option are required");
                 }
                 else {
                     // add object to array
@@ -200,7 +200,7 @@
             $scope.addShortAnswer = function () {
                 //validation 
                 if ($scope.shortAnswer == "") {
-                    alert(" feild in shortAnswer is required");
+                    alert(" field in shortAnswer is required");
                 }
                 $scope.survey.shortAnswer.push($scope.shortAnswer);
                 $scope.shortAnswer = "";

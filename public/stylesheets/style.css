@@ -29,13 +29,6 @@ h1, h2, h3 {
   color: grey;
 }
 
-/*stick question template down to bottom*/
-/*.pull-down {
-	display: inline-block;
-  vertical-align: bottom;
-  float: none;
-}*/
-
 /*restyling navbar*/
 .navbar-default
 {
@@ -53,3 +46,15 @@ h1, h2, h3 {
   background-repeat: none;
   box-shadow: none;
 }
+
+/*stick question template down to bottom*/
+.row-down {
+    min-height: 530px;
+    position: relative;
+  }
+
+  .pull-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
