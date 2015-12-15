@@ -54,8 +54,26 @@ router.get('/', function(req, res, next) {
      }); 
  });
 // submit survey answers
-router.post('/takeSurvey/:id', function(req, res, next) {
-
+ router.post('/takeSurvey/:id', function (req, res, next) {
+     //if survey has been modified , delete all the answer 
+     if (tempSurvey.modified == true)
+     {
+        SurveyAns.remove({ surveyId: req.params.id },function(err){
+            if (err) {
+                console.log(err);
+                res.end(err);
+            }
+            else
+            {
+                console.log("successfully removed");
+                tempSurvey.modified = false; // bring status back to false
+                tempSurvey.save(function (err) {  // save to db
+                    if (err) return handleError(err); 
+                    else console.log("modified status changed!");
+                });
+            }
+        });
+     }
     var twOptAnsArry = [];
     var mulAnsArry = [];
     var shorAnsArry = [];
@@ -88,7 +106,8 @@ router.post('/takeSurvey/:id', function(req, res, next) {
             res.redirect('/');//after submission
         }
     });
-});
+ });
+
 
 /* GET survey list page. */
 router.get('/mySurvey', requireAuth, function(req, res, next) {

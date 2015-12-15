@@ -1,18 +1,20 @@
 <%- include partials/header.ejs %>
-   
+
 
 <main class="container">
-	<h1>Take a Survey</h1>
-	<ul class="list-group">
-		<% for (var i = 0; i < surveys.length; i++) { %>
-		 <li class="list-group-item">
-		 	<a href="/takeSurvey/<%= surveys[i]._id %>" title="Take Survey">
-		 		<%= surveys[i].name %>
-			</a>
-		 	<br />
-		 </li>
-		<% } %>
-	</ul>
+    <h1>Take a Survey</h1>
+    <div class="list-group">
+        <% for (var i = 0; i < surveys.length; i++) { %>
+        <a href="/takeSurvey/<%= surveys[i]._id %>" title="Take Survey" class="list-group-item">
+            <h4 class="list-group-item-heading">
+                <span class="col-md-4">Name:<%= surveys[i].name %></span>
+                <span class="col-md-4">Category:<%=  surveys[i].category %></span>
+                <span class="col-md-4"> Create By:<%=  surveys[i].username %></span>
+            </h4>
+            <p class="list-group-item-text"><%= surveys[i].description %></p>
+        </a>
+        <% } %>
+    </div>
 </main>
 
 

@@ -10,7 +10,9 @@ var SurveySchema = new Schema(
         name: String,
         category: String,
         completed: Boolean,
+        modified:Boolean,
         username: String,
+        description: String,
         twoOption:
         [{
             twOptionQue: String,

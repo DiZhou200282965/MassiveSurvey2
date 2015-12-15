@@ -90,7 +90,9 @@
                 name: $scope.surveyName,
                 category: $scope.category,
                 completed: false,
+                modified:false,
                 username: $scope.username,
+                description: $scope.description,
                 twoOption: $scope.twOptArry,
                 multipleChoice: $scope.mulQueArry,
                 shortAnswer: $scope.shortAnswerArry
@@ -207,6 +209,7 @@
             $scope.update = function () {
                 var r = confirm("Any change will delete all collected answer, are you still want to update your survey?");
                 if (r == true) { // if user say yes then update the survey 
+                    $scope.survey.modified = true;
                     Surveys.update({ id: $scope.survey._id }, $scope.survey, function () {
                         $location.url('/');
                     });
