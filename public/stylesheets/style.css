@@ -22,3 +22,34 @@ h1, h2, h3 {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+
+.completed-true {
+  text-decoration: line-through;
+  color: grey;
+}
+
+/*stick question template down to bottom*/
+/*.pull-down {
+	display: inline-block;
+  vertical-align: bottom;
+  float: none;
+}*/
+
+/*restyling navbar*/
+.navbar-default
+{
+  background-color: transparent;
+  border-color: transparent;
+  background-image: none;
+  background-repeat: none;
+  border-radius: none;
+  box-shadow: none;
+}
+.navbar-default .navbar-nav > .active > a, .active {
+  color: black;
+  background-color: transparent !important;
+  background-image: none;
+  background-repeat: none;
+  box-shadow: none;
+}
