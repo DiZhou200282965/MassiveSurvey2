@@ -106,8 +106,8 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 //       // arryMulCount[j][i] += 1;
                                 //    }
                                 //}
-                            }
-                        }  //option1 
+                           // }
+                        //}  //option1 
                    //     { {1,0,,,,,,},{0},{,,,,},{,,,,,,}}
                     //  aryname[0][0]=1
                        // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
