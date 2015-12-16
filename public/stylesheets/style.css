@@ -49,7 +49,7 @@ h1, h2, h3 {
 
 /*stick question template down to bottom*/
 .row-down {
-    min-height: 530px;
+    min-height: 600px;
     position: relative;
   }
 
