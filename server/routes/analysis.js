@@ -14,6 +14,7 @@ function requireAuth(req, res, next) {
     next();
 };
 
+
 // Get survey list under current user
 router.get('/', requireAuth, function (req, res, next) {
     Survey.find({ username: req.user.username }, function (err, surveys) {
@@ -73,9 +74,9 @@ router.get('/:id', requireAuth, function (req, res, next) {
                     else
                     {     
 
-              /* start of calculation */
+                        /* start of calculation */
 
-                // Calculation for tow Option
+                        // Calculation for tow Option
                         var arryCount = [];
                         for (var i = 0; i < tempSurveyAnsArry.length; i++) {                                            
                             for (var k = 0; k < tempSurveyAnsArry[i].twOptionAns.length; k++) {
@@ -85,16 +86,32 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 }
                             }                           
                         }
-                        // Calculation for Multiple Choice
+                        // #########Calculation for Multiple Choice TBD later
                     
+                        var arryMulCount = [[1,2],[1,2],[1,2],[1,2]];
+                        ////  tempSurveyAnsArry.multipleChoiceAns.length
+                        //for (var i = 0; i < tempSurveyAnsArry.length; i++) {
+                        //    for (var k = 0; k < tempSurveyAnsArry[i].multipleChoiceAns.length; k++) {                               
+                              
+                                //var opts = tempSurvey.multipleChoice[k].mulOpt.length;
+                               
+                                //for (var o = 0; o < opts; o++) {
+                                //    arryMulCount[o] = [];
+                                //}
 
-                        //  tempSurveyAnsArry.multipleChoiceAns.length
-                        for (var i = 0; i < tempSurvey.multipleChoice.length; i++) {
-
-                        }
-                        
-                        console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
-                        console.log("###### array :" + arryCount);// for test###
+                                //for (var j = 0; j < opts; j++) {
+                                //    if (tempSurveyAnsArry[i].multipleChoiceAns[k].mulOptAns === tempSurvey.multipleChoice[k].mulOpt[j])
+                                //    {
+                                //      //  arryMulCount[j].push(0);
+                                //       // arryMulCount[j][i] += 1;
+                                //    }
+                                //}
+                            }
+                        }  //option1 
+                   //     { {1,0,,,,,,},{0},{,,,,},{,,,,,,}}
+                    //  aryname[0][0]=1
+                       // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
+                        console.log("###### array :" + arryMulCount);// for test###
                         //end of calculation
                         res.render('analysis/result', {
                             title: "Survey Answer Details",
@@ -102,6 +119,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
                             tempSurveyAnsArry: tempSurveyAnsArry,
                             tempSurvey: tempSurvey,
                             arryCount: arryCount,
+                            arryMulCount: arryMulCount
                         });
                     }
                 }

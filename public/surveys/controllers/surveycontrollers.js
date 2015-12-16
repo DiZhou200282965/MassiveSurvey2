@@ -58,27 +58,41 @@
        * ##########   Multiple Choice Section  ########         
        */
         $scope.addOption = function () {
-            $scope.mulOptArry.push("");
+            if ($scope.mulOptArry.length>4) {
+                alert("Can't add anymore(5 options maximum)");
+            } else {
+                $scope.mulOptArry.push("");
+            }
+           
         }
         $scope.addMultipleOptionQuestion = function () {
-
-            $scope.mulQueArry.push({
-                mulQue: $scope.mulQue,
-                mulOpt: $scope.mulOptArry
-            });
-            $scope.mulQue = "";
-            $scope.mulOptArry = [];
+            if ($scope.mulQue == "" || $scope.mulQue==undefined) {
+                alert(" Question field is required");
+            } else if ($scope.mulOptArry[0]==""||$scope.mulOptArry[0]==undefined) { //hard code , TBD later
+                alert(" Option field is required(1 At least)");
+            } else {
+                $scope.mulQueArry.push({
+                    mulQue: $scope.mulQue,
+                    mulOpt: $scope.mulOptArry
+                });
+                $scope.mulQue = "";
+                $scope.mulOptArry = [];
+            }
+           
         }//  end of multiple choice section 
         /*
          *  ###########  Short Answer   ##############
          */
         $scope.addShortAnswer = function () {
             //validation 
-            if ($scope.shortAnswer == "") {
+            if ($scope.shortAnswer == ""||$scope.shortAnswer == undefined) {
                 alert(" field in shortAnswer is required");
+            } else {
+                $scope.shortAnswerArry.push($scope.shortAnswer);
+                $scope.shortAnswer = "";
             }
-            $scope.shortAnswerArry.push($scope.shortAnswer);
-            $scope.shortAnswer = "";
+            
+           
         }//  end of Short Answer section 
 
         $scope.save = function () {
@@ -199,11 +213,14 @@
                */
             $scope.addShortAnswer = function () {
                 //validation 
-                if ($scope.shortAnswer == "") {
+                if ($scope.shortAnswer ===""||$scope.shortAnswer ==undefined) {
                     alert(" field in shortAnswer is required");
+                } else {
+                    $scope.survey.shortAnswer.push($scope.shortAnswer);
+                    $scope.shortAnswer = "";
                 }
-                $scope.survey.shortAnswer.push($scope.shortAnswer);
-                $scope.shortAnswer = "";
+                
+               
             }//  end of Short Answer section 
 
             $scope.update = function () {
