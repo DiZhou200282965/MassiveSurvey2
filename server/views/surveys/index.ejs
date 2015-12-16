@@ -8,12 +8,12 @@
 <script type="text/ng-template" id="/surveys.html">
     <div class="panel panel-default" ng-init="setUserName('<%= username %>')">
         <div class="panel-heading">
-            <h1 class="panel-title"><%= title %></h1>
+            <h1 class="panel-title big-heading"><%= title %></h1>
         </div> <!-- panel-heading -->
         <div class="panel-body">
             <h4><span class="badge">{{remainingSurveys()}}</span> Surveys of <span class="badge">{{totalSurveys()}}</span> remaining</h4>
             <h5>Search Surveys:</h5>
-            <input type="text" ng-model="search" id="searchSurvey" placeholder="Survey to find" class="form-control">
+            <input type="text" ng-model="search" id="searchSurvey" placeholder="Search to find Survey" class="form-control">
             <ul class="list-group">
                 <li class="list-group-item active">Current Surveys</li>
                 <li ng-repeat="survey in surveys | filter: search | filter: {username: '<%= username %>'}" class="list-group-item">
@@ -32,10 +32,12 @@
                     <br>
                     <p ng-show="editing[$index]">description:</p>
                     <textarea ng-show="editing[$index]" ng-model="survey.description" class="form-control"></textarea>                 
+                    <div class="form-group text-center">
                     <div class="btn-group">
                         <button type="button" ng-show="editing[$index]" ng-click="update($index)" class="btn btn-warning">update</button>
                         <button type="button" ng-show="editing[$index]" ng-click="remove($index)" class="btn btn-danger">remove</button>
                         <button type="button" ng-show="editing[$index]" ng-click="cancel($index)" class="btn btn-default">cancel</button>
+                    </div>
                     </div> <!-- btn-group -->
                 </li>
             </ul>
@@ -45,27 +47,27 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h1 class="panel-title">Create a new Survey</h1>
+            <h1 class="panel-title big-heading">Create a New Survey</h1>
         </div> <!-- panel-heading -->
         <div class="panel-body">
             <!-- Survey Name -->
             <input type="text" ng-model="surveyName" id="surveyName" placeholder="Survey Name" class="form-control">
             <input type="text" ng-model="category" id="category" placeholder="Category" class="form-control">
             <div>
-                <textarea rows="3" class="form-control" ng-model="description" placeholder="Description here"></textarea>
+                <textarea rows="3" class="form-control" ng-model="description" placeholder="Description"></textarea>
             </div>
             <!-- Dynamically Adding Questions & Options -->
             <div class="row row-down">
                 <!-- Question templates -->
                 <div class="col-md-6 pull-bottom">
                     <!-- Add Two-Option Questions -->
-                    <div class="panel panel-default">
+                    <div class="panel panel-default panel-custom">
                       <div class="panel-heading">
                         <h3 class="panel-title">Two Option</h3>
                       </div>
                       <div class="panel-body">
                         <div>
-                            <input type="text" ng-model="twOptionQue" placeholder="Enter the question here" class="form-control" />
+                            <input type="text" ng-model="twOptionQue" placeholder="Enter the question here" class="form-control question-bold" />
                         </div>
                         <input type="text" ng-model="option1" placeholder="Enter option1 here" class="form-control" />
                         <input type="text" ng-model="option2" placeholder="Enter option2 here" class="form-control" />
@@ -76,13 +78,13 @@
                     </div>
                     
                     
-                    <div class="panel panel-default">
+                    <div class="panel panel-default panel-custom">
                       <div class="panel-heading">
                         <h3 class="panel-title">Multiple Choice</h3>
                       </div>
                       <div class="panel-body">
                         <div>
-                            <input type="text" ng-model="mulQue" placeholder="Enter the question here"  class="form-control"/>
+                            <input type="text" ng-model="mulQue" placeholder="Enter the question here"  class="form-control question-bold"/>
                         </div>
                         <div ng-repeat="mulOpt in mulOptArry track by $index" class="row">
                             <div class="col-md-10">
@@ -100,13 +102,13 @@
                     </div>
                     
                     <!-- Add Short-Answer Questions -->
-                    <div class="panel panel-default">
+                    <div class="panel panel-default panel-custom">
                       <div class="panel-heading">
                         <h3 class="panel-title">Short Answer</h3>
                       </div>
                       <div class="panel-body">
                         <div>
-                            <input type="text" ng-model="shortAnswer" placeholder="Enter the question here" class="form-control" />
+                            <input type="text" ng-model="shortAnswer" placeholder="Enter the question here" class="form-control question-bold" />
                         </div>
                         <div class="text-center">
                             <button type="button" ng-click="addShortAnswer()" class="btn btn-primary">Add Question</button>
@@ -165,7 +167,7 @@
             </div>
             <hr />
             <div class="form-group col-md-12 center-block text-center">
-                <button type="button" ng-click="save()" class="btn btn-success">Create Survey</button>
+                <button type="button" ng-click="save()" class="btn btn-success btn-lg">Create Survey</button>
             </div>
         </div> <!-- panel-body -->
     </div> <!-- panel panel-default -->

@@ -15,7 +15,7 @@
             <% for (var i = 0; i < survey.twoOption.length; i++) { %>
             <li class="list-group-item">
                 <fieldset class="form-group">
-                    <label for="title" class="col-sm-2">Question <%= (i+1) %>: <%= survey.twoOption[i].twOptionQue %></label>
+                    <label for="title" class="col-sm-12">Question <%= (i+1) %>: <%= survey.twoOption[i].twOptionQue %></label>
                 </fieldset>
                 <fieldset class="form-group">
                     <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option1 %>"><%= survey.twoOption[i].option1 %><br>
@@ -26,29 +26,36 @@
             </li>
             <% } %>
         </ul>
+
         <!-- Multiple Choice -->
-         <div>
-    <% for(var i=0; i<survey.multipleChoice.length; i++) { %>
-        <div>
-            <label>Question<%=survey.twoOption.length+i+1 %>:<%= survey.multipleChoice[i].mulQue %></label>
-            <% for( var k=0; k<survey.multipleChoice[i].mulOpt.length; k++) { %>
-                <div>
-                    <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k ]%>"><%= survey.multipleChoice[i].mulOpt[k]%><br />
-                </div>
-                <% } %>
-        </div>
-    <% } %>
-    </div> 
+         <div  class="list-group">
+            <% for(var i=0; i<survey.multipleChoice.length; i++) { %>
+            <li class="list-group-item">
+                <fieldset class="form-group">
+                    <label class="col-sm-12">Question <%=survey.twoOption.length+i+1 %>: <%= survey.multipleChoice[i].mulQue %></label>
+                    <% for( var k=0; k<survey.multipleChoice[i].mulOpt.length; k++) { %>
+                        <fieldset class="form-group">
+                            <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k ]%>"><%= survey.multipleChoice[i].mulOpt[k]%><br />
+                        </fieldset>
+                        <% } %>
+                </fieldset>
+            </li>
+            <% } %>
+        </div> 
+
         <!-- Short Answer -->
-       
-    <% for(var i=0;i<survey.shortAnswer.length;i++) { %>
-        <div>
-            <label>Question<%=survey.twoOption.length+survey.multipleChoice.length+i+1 %>:<%=survey.shortAnswer[i] %></label>
-            <div>
-                <textarea rows="3" name="<%= i %>" placeholder="here to say..."></textarea>
-            </div>
+        <div  class="list-group">
+            <% for(var i=0;i<survey.shortAnswer.length;i++) { %>
+            <li class="list-group-item">
+                <fieldset class="form-group">
+                    <label class="col-sm-12">Question <%=survey.twoOption.length+survey.multipleChoice.length+i+1 %>: <%=survey.shortAnswer[i] %></label>
+                    <fieldset class="form-group col-sm-12">
+                        <textarea rows="3" cols="50" name="<%= i %>" placeholder="Answer Here"></textarea>
+                    </fieldset>
+                </fieldset>
+            </li>
+            <% } %>
         </div>
-    <% } %>
 
 
 
