@@ -112,7 +112,7 @@ router.get('/', function(req, res, next) {
   
 
 
- router.get('/takeSurvey/cancel/:id', requireAuth, function (req, res, next) {
+ router.get('/takeSurvey/cancel/:id', function (req, res, next) {
      res.render('index', {
          title: 'Massive Survey',
          displayName: req.user ? req.user.displayName : '',
