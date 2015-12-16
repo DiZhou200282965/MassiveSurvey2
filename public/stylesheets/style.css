@@ -44,7 +44,8 @@ h1, h2, h3 {
   box-shadow: none;
 }
 .navbar-default .navbar-nav > .active > a, .active {
-  color: black;
+  color: #5A62D1;
+  font-weight: bold;
   background-color: transparent !important;
   background-image: none;
   background-repeat: none;
@@ -175,5 +176,9 @@ h1, h2, h3 {
 }
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
   border-color: #DDD;
+}
+
+a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
+  background-color: #D3EAF2;
 }
 
