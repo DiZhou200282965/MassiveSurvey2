@@ -62,8 +62,8 @@
         <!-- Submit answers -->
         <button type="submit" class="col-sm-offset-5 btn btn-success">Submit</button>
 
-        <a href="/surveys/cancel/<%= survey._id %>" title="cancel" onclick="return ">
-            <button type="button" class="btn btn-danger">Cancel</button>
+        <a href="/takeSurvey/cancel/<%= survey._id %>" title="cancel" onclick="return ">
+            <button type="button" class="btn btn-danger" onclick="return confirm('go back without submission?');">Cancel</button>
         </a>
     </form>
 </main>

@@ -21,18 +21,16 @@
                         <li>
                             <h5>Two Option</h5>
                             <% for (var i = 0; i < tempSurvey.twoOption.length; i++) { %>
-                            <label>Question :<%= (i+1) %><%=tempSurvey.twoOption[i].twOptionQue %></label><br />
-                                <!-- <label >Option1:<%= tempSurvey.twoOption[i].option1 %></label> 
-                                    <label >Option2:<%= tempSurvey.twoOption[i].option2 %></label> -->
+                            <label>Question :<%= (i+1) %><%=tempSurvey.twoOption[i].twOptionQue %></label><br />                          
                                 <div class="progress">
-                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= opt1Count/tempSurveyAnsArry.length*100 %>%;">
-                                    Option1: <%= tempSurvey.twoOption[i].option1 %> <%= opt1Count/tempSurveyAnsArry.length*100 %>%
+                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= arryCount[i]/tempSurveyAnsArry.length*100 %>%;">
+                                    Option1: <%= tempSurvey.twoOption[i].option1 %> <%= arryCount[i]/tempSurveyAnsArry.length*100 %>%
                                   </div>
-                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= (tempSurveyAnsArry.length-opt1Count)/tempSurveyAnsArry.length*100 %>%;">
-                                    Option2: <%= tempSurvey.twoOption[i].option2 %> <%= (tempSurveyAnsArry.length-opt1Count)/tempSurveyAnsArry.length*100 %>%
+                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= (tempSurveyAnsArry.length-arryCount[i])/tempSurveyAnsArry.length*100 %>%;">
+                                    Option2: <%= tempSurvey.twoOption[i].option2 %> <%= (tempSurveyAnsArry.length- arryCount[i])/tempSurveyAnsArry.length*100 %>%
                                   </div>
-                                </div>                                
-                                <!-- <label >Percent:<%= (tempSurveyAnsArry.length-opt1Count)/tempSurveyAnsArry.length %></label> <br />    -->                 
+                                </div>                                 
+                                  <br />                    
                                 <% } %>
                         </li>
                         <li>

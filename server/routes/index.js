@@ -6,7 +6,7 @@ var passport = require('passport');
 var User = require('../models/user');
 var Survey = require('../models/survey.js');
 var SurveyAns = require('../models/surveyanswer.js');
-var tempSurvey;
+var tempSurvey,tempSurveys;
 
 /* check if user is authenticatd */
 function requireAuth(req, res, next){
@@ -26,11 +26,13 @@ router.get('/', function(req, res, next) {
         }
         else
         {
+             tempSurveys = surveys;
             res.render('index', {
                 title: 'Massive Survey',
                 displayName: req.user ? req.user.displayName : '',
                 surveys: surveys              
-            });         
+            });
+            
         }
     });
 });
@@ -106,6 +108,16 @@ router.get('/', function(req, res, next) {
             res.redirect('/');//after submission
         }
     });
+ });
+  
+
+
+ router.get('/takeSurvey/cancel/:id', requireAuth, function (req, res, next) {
+     res.render('index', {
+         title: 'Massive Survey',
+         displayName: req.user ? req.user.displayName : '',
+         surveys: tempSurveys
+     });    
  });
 
 
