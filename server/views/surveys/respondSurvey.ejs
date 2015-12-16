@@ -7,63 +7,66 @@
     <!-- Form to collect survey answers -->
     <form method="post">
         <fieldset class="form-group">
-            <label for="title" class="col-sm-2">Category: <%= survey.category %></label>
+            <label for="title" class="col-sm-2 col-md-offset-3">Category: <%= survey.category %></label>
         </fieldset>
-        <!-- Two-option question -->
-        
-        <ul class="list-group">
-            <% for (var i = 0; i < survey.twoOption.length; i++) { %>
-            <li class="list-group-item">
-                <fieldset class="form-group">
-                    <label for="title" class="col-sm-12">Question <%= (i+1) %>: <%= survey.twoOption[i].twOptionQue %></label>
-                </fieldset>
-                <fieldset class="form-group">
-                    <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option1 %>"><%= survey.twoOption[i].option1 %><br>
-                </fieldset>
-                <fieldset class="form-group">
-                    <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option2 %>"><%= survey.twoOption[i].option2 %><br>
-                </fieldset>
-            </li>
-            <% } %>
-        </ul>
-
-        <!-- Multiple Choice -->
-         <div  class="list-group">
-            <% for(var i=0; i<survey.multipleChoice.length; i++) { %>
-            <li class="list-group-item">
-                <fieldset class="form-group">
-                    <label class="col-sm-12">Question <%=survey.twoOption.length+i+1 %>: <%= survey.multipleChoice[i].mulQue %></label>
-                    <% for( var k=0; k<survey.multipleChoice[i].mulOpt.length; k++) { %>
-                        <fieldset class="form-group">
-                            <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k ]%>"><%= survey.multipleChoice[i].mulOpt[k]%><br />
-                        </fieldset>
-                        <% } %>
-                </fieldset>
-            </li>
-            <% } %>
-        </div> 
-
-        <!-- Short Answer -->
-        <div  class="list-group">
-            <% for(var i=0;i<survey.shortAnswer.length;i++) { %>
-            <li class="list-group-item">
-                <fieldset class="form-group">
-                    <label class="col-sm-12">Question <%=survey.twoOption.length+survey.multipleChoice.length+i+1 %>: <%=survey.shortAnswer[i] %></label>
-                    <fieldset class="form-group col-sm-12">
-                        <textarea rows="3" cols="50" name="<%= i %>" placeholder="Answer Here"></textarea>
+        <!-- Survey body -->
+        <div class="col-md-6 col-md-offset-3">
+            <!-- Two-option question -->
+            <ul class="list-group">
+                <% for (var i = 0; i < survey.twoOption.length; i++) { %>
+                <li class="list-group-item">
+                    <fieldset class="form-group">
+                        <label for="title" class="col-sm-12">Question <%= (i+1) %>: <%= survey.twoOption[i].twOptionQue %></label>
                     </fieldset>
-                </fieldset>
-            </li>
-            <% } %>
+                    <fieldset class="form-group">
+                        <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option1 %>"><%= survey.twoOption[i].option1 %><br>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option2 %>"><%= survey.twoOption[i].option2 %><br>
+                    </fieldset>
+                </li>
+                <% } %>
+            </ul>
+
+            <!-- Multiple Choice -->
+             <div  class="list-group">
+                <% for(var i=0; i<survey.multipleChoice.length; i++) { %>
+                <li class="list-group-item">
+                    <fieldset class="form-group">
+                        <fieldset class="form-group">
+                            <label class="col-sm-12">Question <%=survey.twoOption.length+i+1 %>: <%= survey.multipleChoice[i].mulQue %></label>
+                        </fieldset>
+                        <% for( var k=0; k<survey.multipleChoice[i].mulOpt.length; k++) { %>
+                            <fieldset class="form-group">
+                                <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k ]%>"><%= survey.multipleChoice[i].mulOpt[k]%><br />
+                            </fieldset>
+                            <% } %>
+                    </fieldset>
+                </li>
+                <% } %>
+            </div> 
+
+            <!-- Short Answer -->
+            <div  class="list-group">
+                <% for(var i=0;i<survey.shortAnswer.length;i++) { %>
+                <li class="list-group-item">
+                    <fieldset class="form-group">
+                        <label class="col-sm-12">Question <%=survey.twoOption.length+survey.multipleChoice.length+i+1 %>: <%=survey.shortAnswer[i] %></label>
+                        <fieldset class="form-group col-sm-12">
+                            <textarea rows="3" cols="50" name="<%= i %>" placeholder="Answer Here"></textarea>
+                        </fieldset>
+                    </fieldset>
+                </li>
+                <% } %>
+            </div>
         </div>
 
 
-
         <!-- Submit answers -->
-        <button type="submit" class="col-sm-offset-5 btn btn-success">Submit</button>
+        <button type="submit" class="col-sm-offset-5 btn btn-lg btn-success">Submit</button>
 
         <a href="/takeSurvey/cancel/<%= survey._id %>" title="cancel" onclick="return ">
-            <button type="button" class="btn btn-danger" onclick="return confirm('go back without submission?');">Cancel</button>
+            <button type="button" class="btn btn-danger btn-lg" onclick="return confirm('go back without submission?');">Cancel</button>
         </a>
     </form>
 </main>

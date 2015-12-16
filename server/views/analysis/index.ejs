@@ -1,19 +1,29 @@
 <% include ../partials/header.ejs %>
 
-
 <main class="container">
-	<h1>Analysis for Your Surveys</h1>
-    <ul class="list-group">
-        <% for (var i = 0; i < surveys.length; i++) { %>
-        <li class="list-group-item">
-            <a href="/analysis/<%= surveys[i]._id %>" title="See Analysis">
-                <h4><%= surveys[i].name %></h4>                                  
-            </a>
-            <br />
-        </li>
-        <% } %>
-    </ul>
+    <h1>Analysis for Your Surveys</h1>
+        <div class="list-group row">
+            <% for (var i = 0; i < surveys.length; i++) { %>
+            <div class="col-md-10 col-md-offset-1">
+                <a href="/analysis/<%= surveys[i]._id %>" title="See Analysis" class="list-group-item">
+                    <h4 class="list-group-item-heading">
+                        <div class="text-center">
+                            <span><%= surveys[i].name %></span> <br />
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Category:<%=  surveys[i].category %></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="pull-right"> Created By:<%=  surveys[i].username %></h5>
+                        </div>                        
+                    </h4>                    
+                    <p class="list-group-item-text" style="padding-left: 15px"><%= surveys[i].description %></p>
+                </a>
+            </div>
+            <% } %>
+        </div>
 </main>
+
 
 <% include ../partials/boot.ejs %>
 <% include ../partials/footer.ejs %>

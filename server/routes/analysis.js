@@ -85,7 +85,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                     arryCount[k] += 1;                                    
                                 }
                             }                           
-                        }
+                        };
                         // #########Calculation for Multiple Choice TBD later
                     
                        // var arryMulCount = [[1,2],[1,2],[1,2],[1,2]];
@@ -108,10 +108,11 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 //}
                            // }
                         //}  //option1 
+
                    //     { {1,0,,,,,,},{0},{,,,,},{,,,,,,}}
                     //  aryname[0][0]=1
                        // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
-                        console.log("###### array :" + arryMulCount);// for test###
+                        //console.log("###### array :" + arryMulCount);// for test###
                         //end of calculation
                         res.render('analysis/result', {
                             title: "Survey Answer Details",
