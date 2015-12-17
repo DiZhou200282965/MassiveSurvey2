@@ -86,7 +86,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 }
                             }                           
                         };
-                        // #########Calculation for Multiple Choice TBD later
+                        // #########Calculation for Multiple Choice
                         var mulCount = []; //    [[],[],[],[]]
                         for (var i = 0; i < tempSurveyAnsArry.length; i++) {
                             for (var k = 0; k < tempSurveyAnsArry[i].multipleChoiceAns.length; k++) {
@@ -99,11 +99,9 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 }
                             }
                         };
-            
-                           // }
-                        //}  //option1 
-
-                   //     { {1,0,,,,,,},{0},{,,,,},{,,,,,,}}
+                 
+                      
+              
                     //  aryname[0][0]=1
                        // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
                         console.log("###### array :" + mulCount);// for test###

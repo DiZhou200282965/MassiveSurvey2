@@ -38,10 +38,13 @@
                             <% for (var i = 0; i < tempSurvey.multipleChoice.length; i++) { %>                               
                             <label>Question :<%= (i+tempSurvey.twoOption.length+1) %><%=tempSurvey.multipleChoice[i].mulQue%></label><br />
                                 <% for (var k = 0; k < tempSurvey.multipleChoice[i].mulOpt.length; k++) { %>
-                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= mulCount[k][i]/tempSurveyAnsArry.length*100 %></label> <br />  
+                            <div class="progress-bar <%  if(k%2) {%>progress-bar-success<% }%>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= mulCount[k][i]/tempSurveyAnsArry.length*100 %>%;">
+                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= mulCount[k][i]/tempSurveyAnsArry.length*100 %></label>
+                            </div>
+                            <!--    <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= mulCount[k][i]/tempSurveyAnsArry.length*100 %></label> <br /> -->
                                 <% } %>
-                            <% } %>
-                        </li>
+                                <% } %>
+</li>
                         <li>
                             <h5>Short Answer</h5>
                             <% for (var i = 0; i < tempSurvey.shortAnswer.length; i++) { %>
