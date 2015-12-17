@@ -1,0 +1,13 @@
+---select
+
+db.surveys.find().pretty()
+db.surveyAnswers.find().pretty()
+
+
+-----drop 
+db.surveys.drop()
+db.surveyAnswers.drop()
+
+
+--- 
+show collections

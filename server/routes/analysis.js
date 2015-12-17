@@ -87,7 +87,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
                             }                           
                         };
                         // #########Calculation for Multiple Choice
-                        var mulCount = []; //    [[],[],[],[]]
+                        var mulCount = []; //    [[],[],[],[],[]]
                         for (var i = 0; i < tempSurveyAnsArry.length; i++) {
                             for (var k = 0; k < tempSurveyAnsArry[i].multipleChoiceAns.length; k++) {
                                 for (var j = 0; j < tempSurvey.multipleChoice[k].mulOpt.length; j++) {

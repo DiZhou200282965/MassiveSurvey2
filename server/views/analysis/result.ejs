@@ -23,13 +23,17 @@
                             <% for (var i = 0; i < tempSurvey.twoOption.length; i++) { %>
                             <label>Question :<%= (i+1) %><%=tempSurvey.twoOption[i].twOptionQue %></label><br />                          
                                 <div class="progress">
-                                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= arryCount[i]/tempSurveyAnsArry.length*100 %>%;">
-                                    Option1: <%= tempSurvey.twoOption[i].option1 %> <%= arryCount[i]/tempSurveyAnsArry.length*100 %>%
-                                  </div>
+                                    <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= arryCount[i]/tempSurveyAnsArry.length*100 %>%;">
+                                        Option 1: <%= tempSurvey.twoOption[i].option1 %> <i class="fa fa-user"></i> 
+                                        <% var tOpt1=Math.round(arryCount[i]/tempSurveyAnsArry.length*100) %>
+                                        <%=tOpt1 %>%
+                                    </div> 
                                   <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= (tempSurveyAnsArry.length-arryCount[i])/tempSurveyAnsArry.length*100 %>%;">
-                                    Option2: <%= tempSurvey.twoOption[i].option2 %> <%= (tempSurveyAnsArry.length- arryCount[i])/tempSurveyAnsArry.length*100 %>%
+                                    Option 2: <%= tempSurvey.twoOption[i].option2 %> <i class="fa fa-user"></i>
+                                      <% var tOpt2=Math.round((tempSurveyAnsArry.length-arryCount[i])/tempSurveyAnsArry.length*100) %>
+                                      <%=tOpt2 %>%
                                   </div>
-                                </div>                                 
+                                 </div>                               
                                   <br />                    
                                 <% } %>
                         </li>
@@ -38,13 +42,13 @@
                             <% for (var i = 0; i < tempSurvey.multipleChoice.length; i++) { %>                               
                             <label>Question :<%= (i+tempSurvey.twoOption.length+1) %><%=tempSurvey.multipleChoice[i].mulQue%></label><br />
                                 <% for (var k = 0; k < tempSurvey.multipleChoice[i].mulOpt.length; k++) { %>
+                            
                             <div class="progress-bar <%  if(k%2) {%>progress-bar-success<% }%>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= mulCount[k][i]/tempSurveyAnsArry.length*100 %>%;">
-                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= mulCount[k][i]/tempSurveyAnsArry.length*100 %></label>
-                            </div>
-                            <!--    <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= mulCount[k][i]/tempSurveyAnsArry.length*100 %></label> <br /> -->
+                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label><i class="fa fa-user"></i> : <% var mulOpt=Math.round(mulCount[k][i]/tempSurveyAnsArry.length*100) %><%=mulOpt %>%</label>
+                            </div>                             
                                 <% } %>
                                 <% } %>
-</li>
+                        </li>
                         <li>
                             <h5>Short Answer</h5>
                             <% for (var i = 0; i < tempSurvey.shortAnswer.length; i++) { %>

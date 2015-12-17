@@ -19,7 +19,7 @@
                         <label for="title" class="col-sm-12">Question <%= (i+1) %>: <%= survey.twoOption[i].twOptionQue %></label>
                     </fieldset>
                     <fieldset class="form-group">
-                        <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option1 %>"><%= survey.twoOption[i].option1 %><br>
+                        <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option1 %>" required><%= survey.twoOption[i].option1 %><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <input type="radio" name="<%= survey.twoOption[i]._id %>" value="<%= survey.twoOption[i].option2 %>"><%= survey.twoOption[i].option2 %><br>
@@ -38,7 +38,7 @@
                         </fieldset>
                         <% for( var k=0; k<survey.multipleChoice[i].mulOpt.length; k++) { %>
                             <fieldset class="form-group">
-                                <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k ]%>"><%= survey.multipleChoice[i].mulOpt[k]%><br />
+                                <input type="radio" name="<%= survey.multipleChoice[i]._id %>" value="<%= survey.multipleChoice[i].mulOpt[k]%>" required><%= survey.multipleChoice[i].mulOpt[k]%><br />
                             </fieldset>
                             <% } %>
                     </fieldset>
