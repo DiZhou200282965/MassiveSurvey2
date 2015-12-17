@@ -38,7 +38,7 @@
                             <% for (var i = 0; i < tempSurvey.multipleChoice.length; i++) { %>                               
                             <label>Question :<%= (i+tempSurvey.twoOption.length+1) %><%=tempSurvey.multipleChoice[i].mulQue%></label><br />
                                 <% for (var k = 0; k < tempSurvey.multipleChoice[i].mulOpt.length; k++) { %>
-                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= %></label> <br />  
+                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label>Percent:TBD<%= mulCount[k][i]/tempSurveyAnsArry.length*100 %></label> <br />  
                                 <% } %>
                             <% } %>
                         </li>

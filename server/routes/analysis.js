@@ -87,32 +87,26 @@ router.get('/:id', requireAuth, function (req, res, next) {
                             }                           
                         };
                         // #########Calculation for Multiple Choice TBD later
-                    
-                       // var arryMulCount = [[1,2],[1,2],[1,2],[1,2]];
-                        ////  tempSurveyAnsArry.multipleChoiceAns.length
-                        //for (var i = 0; i < tempSurveyAnsArry.length; i++) {
-                        //    for (var k = 0; k < tempSurveyAnsArry[i].multipleChoiceAns.length; k++) {                               
-                              
-                                //var opts = tempSurvey.multipleChoice[k].mulOpt.length;
-                               
-                                //for (var o = 0; o < opts; o++) {
-                                //    arryMulCount[o] = [];
-                                //}
-
-                                //for (var j = 0; j < opts; j++) {
-                                //    if (tempSurveyAnsArry[i].multipleChoiceAns[k].mulOptAns === tempSurvey.multipleChoice[k].mulOpt[j])
-                                //    {
-                                //      //  arryMulCount[j].push(0);
-                                //       // arryMulCount[j][i] += 1;
-                                //    }
-                                //}
+                        var mulCount = []; //    [[],[],[],[]]
+                        for (var i = 0; i < tempSurveyAnsArry.length; i++) {
+                            for (var k = 0; k < tempSurveyAnsArry[i].multipleChoiceAns.length; k++) {
+                                for (var j = 0; j < tempSurvey.multipleChoice[k].mulOpt.length; j++) {
+                                    mulCount.push([]);
+                                    if (tempSurveyAnsArry[i].multipleChoiceAns[k].mulOptAns === tempSurvey.multipleChoice[k].mulOpt[j]) {
+                                    mulCount[j].push(0);
+                                    mulCount[j][k] += 1;
+                                    } 
+                                }
+                            }
+                        };
+            
                            // }
                         //}  //option1 
 
                    //     { {1,0,,,,,,},{0},{,,,,},{,,,,,,}}
                     //  aryname[0][0]=1
                        // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
-                        //console.log("###### array :" + arryMulCount);// for test###
+                        console.log("###### array :" + mulCount);// for test###
                         //end of calculation
                         res.render('analysis/result', {
                             title: "Survey Answer Details",
@@ -120,7 +114,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
                             tempSurveyAnsArry: tempSurveyAnsArry,
                             tempSurvey: tempSurvey,
                             arryCount: arryCount,
-                         //   arryMulCount: arryMulCount
+                            mulCount: mulCount
                         });
                     }
                 }
