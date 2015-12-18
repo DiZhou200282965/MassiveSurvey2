@@ -3,7 +3,13 @@ body {
   font-family: 'Lato', sans-serif;
   /*background-color: #CDC6E1;*/
   /*background: rgba(155, 206, 245, 0.6);*/
-  background-color: #98DEF5;
+  /*background-color: #98DEF5;*/
+  /*background-image: url('../images/background.jpg');*/
+  background: url('../images/background.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
   color: #006587;
 }
 
