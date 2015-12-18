@@ -44,8 +44,8 @@ h1, h2, h3 {
 /*restyling navbar*/
 .navbar-default
 {
-  /*background: rgba(255, 255, 255, 1);*/
   background-color: white;
+  font-size: 15px;
   border-color: transparent;
   background-image: none;
   background-repeat: none;
@@ -53,7 +53,7 @@ h1, h2, h3 {
   box-shadow: none;
 }
 .navbar-default .navbar-nav > .active > a, .active {
-  color: #5A62D1;
+  color: #004E68;
   font-weight: bold;
   background-color: transparent !important;
   background-image: none;
@@ -61,8 +61,7 @@ h1, h2, h3 {
   box-shadow: none;
 }
 .navbar-nav>.active>a:hover {
-    color: #5A62D1;
-    /*background-color: #e7e7e7;*/
+    color: #004E68;
 }
 
 /*stick question template down to bottom*/
@@ -177,9 +176,7 @@ h1, h2, h3 {
   background-repeat: repeat-x;
 }
 
-.list-group-item {
-  /*background-color: #80BBCF;*/
-}
+
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     color: #286090;
     text-shadow: 0 -1px 0 #FFFFFF;
@@ -196,7 +193,7 @@ h1, h2, h3 {
 }
 
 a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
-    background-color: #7C83AF;
+    background-color: #1C7592;
     vertical-align: middle;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
@@ -208,6 +205,13 @@ a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, 
     transition-duration: 0.5s;
 }
 
+.list-group-item-heading {
+  font-weight: bold;  
+}
+a.list-group-item .list-group-item-heading, button.list-group-item .list-group-item-heading {
+  color: #528494;
+}
+
 .hover-change {
   /*background-color: #80BBCF;*/
   transition: all 0.5s ease-in-out;
@@ -217,7 +221,7 @@ a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, 
   transition: all 0.5s ease-in-out;
 }
 .hover-change:hover .heading-change{
-    color: white;
+    color: #B0DFEE;
     font-size: 93%;
 }
 .hover-change:hover .content-change {
@@ -225,7 +229,7 @@ a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, 
     font-size: 120%;
 }
 
-
+/*a semi-transparent background for containers*/
 .outer-semitransparent {
   background: rgba(255, 255, 255, 0.7);
 }
