@@ -4,7 +4,6 @@ body {
   /*background-color: #CDC6E1;*/
   /*background: rgba(155, 206, 245, 0.6);*/
   /*background-color: #98DEF5;*/
-  /*background-image: url('../images/background.jpg');*/
   background: url('../images/background.jpg') no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -197,8 +196,6 @@ h1, h2, h3 {
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
   border-color: #DDD;
 }
-
-/*a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover*/
 div.list-group-item:focus, div.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
     background-color: #1C7592;
     vertical-align: middle;
@@ -214,7 +211,6 @@ div.list-group-item:focus, div.list-group-item:hover, button.list-group-item:foc
 .list-group-item-heading {
   font-weight: bold;  
 }
-/*a.list-group-item .list-group-item-heading, button.list-group-item .list-group-item-heading*/
 div.list-group-item>a:hover {
   text-decoration: none;
 }

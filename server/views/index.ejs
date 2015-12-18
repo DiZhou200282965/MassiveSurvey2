@@ -5,10 +5,11 @@
 <main class="container-fluid outer-semitransparent">
     <h1>Take a Survey</h1><br />
         <div class="list-group row">
-            <% for (var i = 0; i < surveys.length; i++) { %>                 
+            <% for (var i = 0; i < surveys.length; i++) { %>       
+            <!-- show only active surveys -->
+            <% if (!surveys[i].completed) { %>          
                 <div class="col-md-8 col-md-offset-2 hover-change list-group-item">
-                    <!-- show only active surveys -->
-                    <% if (!surveys[i].completed) { %>                    
+                    
                         <a href="/takeSurvey/<%= surveys[i]._id %>" title="Take Survey" >                    
                         <h4 class="list-group-item-heading heading-change">
                             <div class="text-center">
@@ -22,9 +23,9 @@
                             </div>                        
                         </h4>                    
                         <p class="list-group-item-text content-change" style="padding-left: 15px"><i><%= surveys[i].description %></i></p>                    
-                        </a>                    
-                    <% } %>                    
-                </div>                    
+                        </a>
+                </div>
+            <% } %>
             <% } %>
         </div>
 </main>
