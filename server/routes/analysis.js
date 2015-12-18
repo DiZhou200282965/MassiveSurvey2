@@ -79,8 +79,12 @@ router.get('/:id', requireAuth, function (req, res, next) {
                         var arryCount = [];
                         for (var i = 0; i < tempSurveyAnsArry.length; i++) {                                            
                             for (var k = 0; k < tempSurveyAnsArry[i].twOptionAns.length; k++) {
-                                if (tempSurveyAnsArry[i].twOptionAns[k].twoOptionAns === tempSurvey.twoOption[k].option1){
-                                    arryCount.push(0);                                     
+                                if (tempSurveyAnsArry[i].twOptionAns[k].twoOptionAns === tempSurvey.twoOption[k].option1) {
+                                    arryCount.push(0);
+                                    if (arryCount[k + 1] == undefined)
+                                    {
+                                        arryCount.push(0);
+                                    }                                                                      
                                     arryCount[k] += 1;                                    
                                 }
                             }                           
@@ -93,8 +97,10 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 for (var j = 0; j < tempSurvey.multipleChoice[k].mulOpt.length; j++) {
                                     mulCount.push([]);
                                     mulCount[j].push(0);
-                                    if (tempSurveyAnsArry[i].multipleChoiceAns[k].mulOptAns === tempSurvey.multipleChoice[k].mulOpt[j]) {
-                                        if (mulCount[j][k+1]==undefined) {
+                                    if (tempSurveyAnsArry[i].multipleChoiceAns[k].mulOptAns === tempSurvey.multipleChoice[k].mulOpt[j])
+                                    {
+                                        if (mulCount[j][k + 1] == undefined)
+                                        {
                                             mulCount[j].push(0);
                                         }                                        
                                         mulCount[j][k] += 1;
@@ -105,7 +111,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
 
                     
                        // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);
-                        console.log("###### array :" + mulCount);// for test###
+                       console.log("###### array :" + arryCount);// for test###
                         //end of calculation
                         res.render('analysis/result', {
                             title: "Survey Answer Details",
