@@ -2,7 +2,7 @@
 
 
 
-<div class="container">
+<div class="container outer-semitransparent add-top-padding">
     <ng-view></ng-view>
 </div> <!-- container -->
 <script type="text/ng-template" id="/surveys.html">
@@ -45,16 +45,18 @@
         </div> <!-- panel-body -->
     </div> <!-- panel panel-default -->
 
-    <div class="panel panel-default">
+    <div class="panel panel-default outer-semitransparent">
         <div class="panel-heading">
             <h1 class="panel-title big-heading">Create a New Survey</h1>
         </div> <!-- panel-heading -->
-        <div class="panel-body">
+        <div class="panel-body row">
             <!-- Survey Name -->
-            <input type="text" ng-model="surveyName" id="surveyName" placeholder="Survey Name" class="form-control">
-            <input type="text" ng-model="category" id="category" placeholder="Category" class="form-control">
-            <div>
-                <textarea rows="3" class="form-control" ng-model="description" placeholder="Description"></textarea>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+    	            <input type="text" ng-model="surveyName" id="surveyName" placeholder="Survey Name" class="form-control">
+    	            <input type="text" ng-model="category" id="category" placeholder="Category" class="form-control">            
+                    <textarea rows="3" class="form-control" ng-model="description" placeholder="Description"></textarea>
+                </div>
             </div>
             <!-- Dynamically Adding Questions & Options -->
             <div class="row row-down">

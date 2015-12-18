@@ -14,7 +14,6 @@ function requireAuth(req, res, next) {
     next();
 };
 
-
 // Get survey list under current user
 router.get('/', requireAuth, function (req, res, next) {
     Survey.find({ username: req.user.username }, function (err, surveys) {
@@ -99,8 +98,6 @@ router.get('/:id', requireAuth, function (req, res, next) {
                                 }
                             }
                         };
-                 
-                      
               
                     //  aryname[0][0]=1
                        // console.log("survey length: " + tempSurveyAnsArry[0].twOptionAns[0].twoOptionAns);

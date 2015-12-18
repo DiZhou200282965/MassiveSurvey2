@@ -1,7 +1,7 @@
 <% include ../partials/header.ejs %>
 
 
-<main class="container">
+<main class="container outer-semitransparent">
     <h1><%= survey.name %></h1>
 
     <!-- Form to collect survey answers -->
@@ -63,11 +63,12 @@
 
 
         <!-- Submit answers -->
-        <button type="submit" class="col-sm-offset-5 btn btn-lg btn-success">Submit</button>
-
+        <div class="add-bottom-padding">
+        <button type="submit" class="col-sm-offset-5 btn btn-lg btn-success">Submit</button>        
         <a href="/takeSurvey/cancel/<%= survey._id %>" title="cancel" onclick="return ">
             <button type="button" class="btn btn-danger btn-lg" onclick="return confirm('go back without submission?');">Cancel</button>
         </a>
+        </div>
     </form>
 </main>
 

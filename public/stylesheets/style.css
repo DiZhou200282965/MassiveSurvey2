@@ -1,9 +1,15 @@
 body {
   padding: 50px;
   font-family: 'Lato', sans-serif;
-  /*background-color: #D3EAF2;*/
+  /*background-color: #CDC6E1;*/
+  /*background: rgba(155, 206, 245, 0.6);*/
+  background-color: #98DEF5;
+  color: #006587;
 }
 
+legend{
+  color: #006587;
+}
 a {
   color: #00B7FF;
 }
@@ -12,19 +18,21 @@ h1, h2, h3 {
 	text-align: center;
 }
 
+/*Panel Heading*/
 .big-heading {
   font-size: 25px;
+  color: #F3FBFE;
 }
 
 /*Restyle to fit logo size*/
 .navbar-brand {
-    height: 80px;
+    height: 100px;
 }
 
 /* line height is 20px so add 30px top and bottom to equal the new .navbar-brand height */
 .nav >li >a {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 
@@ -36,7 +44,8 @@ h1, h2, h3 {
 /*restyling navbar*/
 .navbar-default
 {
-  background-color: transparent;
+  /*background: rgba(255, 255, 255, 1);*/
+  background-color: white;
   border-color: transparent;
   background-image: none;
   background-repeat: none;
@@ -50,6 +59,10 @@ h1, h2, h3 {
   background-image: none;
   background-repeat: none;
   box-shadow: none;
+}
+.navbar-nav>.active>a:hover {
+    color: #5A62D1;
+    /*background-color: #e7e7e7;*/
 }
 
 /*stick question template down to bottom*/
@@ -148,10 +161,10 @@ h1, h2, h3 {
 .panel-default>.panel-heading {
   background-image: transparent !important;
   background-color: transparent !important;
-  background-image: -webkit-linear-gradient(top,#D3EAF2 0,#D3EAF2 100%);
-  background-image: -o-linear-gradient(top,#D3EAF2 0,#D3EAF2 100%);
-  background-image: linear-gradient(to bottom, #D3EAF2 0px, #D3EAF2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D3EAF2', endColorstr='#D3EAF2', GradientType=0);
+  background-image: -webkit-linear-gradient(top,#80BBCF 0,#80BBCF 100%);
+  background-image: -o-linear-gradient(top,#80BBCF 0,#80BBCF 100%);
+  background-image: linear-gradient(to bottom, #80BBCF 0px, #80BBCF 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80BBCF', endColorstr='#80BBCF', GradientType=0);
   background-repeat: repeat-x;
 }
 .panel-custom>.panel-heading {
@@ -162,6 +175,10 @@ h1, h2, h3 {
   background-image: linear-gradient(to bottom, #DADEED 0px, #DADEED 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DADEED', endColorstr='#DADEED', GradientType=0);
   background-repeat: repeat-x;
+}
+
+.list-group-item {
+  /*background-color: #80BBCF;*/
 }
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     color: #286090;
@@ -179,7 +196,7 @@ h1, h2, h3 {
 }
 
 a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
-    background-color: #D3EAF2;
+    background-color: #7C83AF;
     vertical-align: middle;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
@@ -191,4 +208,30 @@ a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, 
     transition-duration: 0.5s;
 }
 
+.hover-change {
+  /*background-color: #80BBCF;*/
+  transition: all 0.5s ease-in-out;
+}
+.hover-change:hover {
+  /*background-color: #5A62D1;*/
+  transition: all 0.5s ease-in-out;
+}
+.hover-change:hover .heading-change{
+    color: white;
+    font-size: 93%;
+}
+.hover-change:hover .content-change {
+    color: white;
+    font-size: 120%;
+}
 
+
+.outer-semitransparent {
+  background: rgba(255, 255, 255, 0.7);
+}
+.add-bottom-padding{
+  padding-bottom: 20px;
+}
+.add-top-padding{
+  padding-top: 20px;
+}

@@ -1,27 +1,28 @@
 <% include ../partials/header.ejs %>
 
 
-<main class="container">
-	<h1>Analysis Result for <%= tempSurvey.name %></h1>
+<main class="container outer-semitransparent">
+	<h1>Analysis Result for <%= tempSurvey.name %></h1><br />
 	<form method="get">
 		<ul class="list-group">
             <li class="list-group-item ">
-                <fieldset class="form-group" >
-                    <legend>General Information:</legend>
-                    <label for="title">Number of respondents: <%= tempSurveyAnsArry.length %></label><br />
-                    <label>Number of Two Option Questions: <%= tempSurvey.twoOption.length %></label><br />
-                    <label>Number of Multiple Option Questions: <%= tempSurvey.multipleChoice.length %></label><br />
-                    <label>Number of Short Questions: <%= tempSurvey.shortAnswer.length %></label>
+                <fieldset class="form-group text-center" >
+                    <legend><strong>General Information:</strong></legend>
+                    <label for="title"><i><%= tempSurveyAnsArry.length %></i> respondents</label><br />
+                    <label><i><%= tempSurvey.twoOption.length %></i> two-option question(s)</label><br />
+                    <label><i><%= tempSurvey.multipleChoice.length %></i> multiple-choice question(s)</label><br />
+                    <label><i><%= tempSurvey.shortAnswer.length %></i> short-answer question(s)</label>
                 </fieldset>
             </li>
             <li class="list-group-item">
                 <fieldset>
-                    <legend>Question Information:</legend>
-                    <ul class="list-group">
-                        <li>
-                            <h5>Two Option</h5>
-                            <% for (var i = 0; i < tempSurvey.twoOption.length; i++) { %>
-                            <label>Question :<%= (i+1) %><%=tempSurvey.twoOption[i].twOptionQue %></label><br />                          
+                    <legend class="form-group text-center"><strong>Question Information:</strong></legend>
+                    <ul class="list-group outer-semitransparent">
+                        <li class="list-group-item">
+                            <h4><strong>Two Option</strong></h4>
+                            <% for (var i = 0; i < tempSurvey.twoOption.length; i++) 
+                            { %>
+                                <label>Question <%= (i+1) %>: <%=tempSurvey.twoOption[i].twOptionQue %></label><br />
                                 <div class="progress">
                                     <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= arryCount[i]/tempSurveyAnsArry.length*100 %>%;">
                                         Option 1: <%= tempSurvey.twoOption[i].option1 %> <i class="fa fa-user"></i> 
@@ -33,28 +34,32 @@
                                       <% var tOpt2=Math.round((tempSurveyAnsArry.length-arryCount[i])/tempSurveyAnsArry.length*100) %>
                                       <%=tOpt2 %>%
                                   </div>
-                                 </div>                               
-                                  <br />                    
-                                <% } %>
+                                 </div>                                
+                            <% } %>                            
                         </li>
-                        <li>
-                            <h5>Multiple Choice</h5>
-                            <% for (var i = 0; i < tempSurvey.multipleChoice.length; i++) { %>                               
-                            <label>Question :<%= (i+tempSurvey.twoOption.length+1) %><%=tempSurvey.multipleChoice[i].mulQue%></label><br />
-                                <% for (var k = 0; k < tempSurvey.multipleChoice[i].mulOpt.length; k++) { %>
-                            
-                            <div class="progress-bar <%  if(k%2) {%>progress-bar-success<% }%>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= mulCount[k][i]/tempSurveyAnsArry.length*100 %>%;">
-                                <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label><i class="fa fa-user"></i> : <% var mulOpt=Math.round(mulCount[k][i]/tempSurveyAnsArry.length*100) %><%=mulOpt %>%</label>
-                            </div>                             
+                        <li class="list-group-item">
+                            <h4><strong>Multiple Choice</strong></h4>
+                            <% for (var i = 0; i < tempSurvey.multipleChoice.length; i++) 
+                            { %>                               
+                                <label>Question <%= (i+tempSurvey.twoOption.length+1) %>: <%=tempSurvey.multipleChoice[i].mulQue%></label><br />
+                                <% for (var k = 0; k < tempSurvey.multipleChoice[i].mulOpt.length; k++) 
+                                { %>                                
+                                    <div class="progress-bar <%  if(k%2) {%>progress-bar-success<% }%>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= mulCount[k][i]/tempSurveyAnsArry.length*100 %>%;">
+                                        <label>Option<%= k +1 %>:<%= tempSurvey.multipleChoice[i].mulOpt[k] %></label><label><i class="fa fa-user"></i> : <% var mulOpt=Math.round(mulCount[k][i]/tempSurveyAnsArry.length*100) %><%=mulOpt %>%</label>
+                                    </div>                             
                                 <% } %>
-                                <% } %>
+                                <br />
+                            <% } %>
+                            <br />
                         </li>
-                        <li>
-                            <h5>Short Answer</h5>
-                            <% for (var i = 0; i < tempSurvey.shortAnswer.length; i++) { %>
-                            <label>Question :<%= (i+tempSurvey.twoOption.length+tempSurvey.multipleChoice.length+1) %><%=tempSurvey.shortAnswer[i] %></label><br />
-                                <% for (var k = 0; k < tempSurveyAnsArry.length; k++) { %>
-                                 <label>Answer<%=k+1 %>:<%=tempSurveyAnsArry[k].shortAnswer[i].shrtAns %></label><br />
+                        <li class="list-group-item">
+                            <h4><strong>Short Answer</strong></h4>
+                            <% for (var i = 0; i < tempSurvey.shortAnswer.length; i++) 
+                            { %>
+                                <label>Question <%= (i+tempSurvey.twoOption.length+tempSurvey.multipleChoice.length+1) %>: <%=tempSurvey.shortAnswer[i] %></label><br />
+                                <% for (var k = 0; k < tempSurveyAnsArry.length; k++) 
+                                { %>
+                                    <label>Answer <%=k+1 %>: <%=tempSurveyAnsArry[k].shortAnswer[i].shrtAns %></label><br />
                                 <% } %>
                             <% } %>
                         </li>
@@ -68,7 +73,7 @@
 
 </ul>
 	</form>
-    <div class="text-center">
+    <div class="text-center add-bottom-padding">
     	<a href="javascript:window.print()" class="btn btn-info btn-lg" id="print-button">
     		<span class="glyphicon glyphicon-print"></span> Print 
         </a>
