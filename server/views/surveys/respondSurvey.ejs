@@ -53,7 +53,7 @@
                     <fieldset class="form-group">
                         <label class="col-sm-12">Question <%=survey.twoOption.length+survey.multipleChoice.length+i+1 %>: <%=survey.shortAnswer[i] %></label>
                         <fieldset class="form-group col-sm-12">
-                            <textarea rows="3" cols="50" name="<%= i %>" placeholder="Answer Here"></textarea>
+                            <textarea rows="3" cols="50" name="<%= i %>" placeholder="Answer Here" required></textarea>
                         </fieldset>
                     </fieldset>
                 </li>

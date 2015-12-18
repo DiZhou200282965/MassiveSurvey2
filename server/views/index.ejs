@@ -4,30 +4,32 @@
 
 <main class="container-fluid outer-semitransparent">
     <h1>Take a Survey</h1><br />
-        <div class="list-group row">
-            <% for (var i = 0; i < surveys.length; i++) { %>       
-            <!-- show only active surveys -->
-            <% if (!surveys[i].completed) { %>          
-                <div class="col-md-8 col-md-offset-2 hover-change list-group-item">
-                    
-                        <a href="/takeSurvey/<%= surveys[i]._id %>" title="Take Survey" >                    
-                        <h4 class="list-group-item-heading heading-change">
-                            <div class="text-center">
-                                <span><%= surveys[i].name %></span> <br />
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="heading-change">Category: <%=  surveys[i].category %></h5>
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="pull-right heading-change"> Created By: <%=  surveys[i].username %></h5>
-                            </div>                        
-                        </h4>                    
-                        <p class="list-group-item-text content-change" style="padding-left: 15px"><i><%= surveys[i].description %></i></p>                    
-                        </a>
-                </div>
-            <% } %>
-            <% } %>
+    <div class="list-group row">
+        <% for (var i = 0; i < surveys.length; i++) { %>    
+            
+        <!-- show only active surveys -->
+        <% if (!surveys[i].expired) { %>
+        <div class="col-md-8 col-md-offset-2 hover-change list-group-item">
+
+            <a href="/takeSurvey/<%= surveys[i]._id %>" title="Take Survey">
+                <h4 class="list-group-item-heading heading-change">
+                    <div class="text-center">
+                        <span><%= surveys[i].name %></span> <br />                        
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="heading-change">Category: <%=  surveys[i].category %></h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="pull-right heading-change"> Created By: <%=  surveys[i].username %></h5>
+                    </div>
+                 
+                </h4>
+                <p class="list-group-item-text content-change" style="padding-left: 15px"><i><%= surveys[i].description %></i></p>
+            </a>
         </div>
+        <% } %>
+        <% } %>
+    </div>
 </main>
 
 

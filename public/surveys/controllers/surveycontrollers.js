@@ -17,7 +17,7 @@
         $scope.twOptionQue = '';
         $scope.option1 = '';
         $scope.option2 = '';
-        $scope.shortAnswer = '';
+        $scope.shortAnswer = '';   
 
         $scope.setUserName = function (userName) {
             $scope.username = userName; //get the username
@@ -31,7 +31,8 @@
                 $scope.surveys = $scope.userSurveys;
             });
         };
-
+        
+       
         /*
          *    ###########  two-option   ##############
          */
@@ -66,17 +67,26 @@
            
         }
         $scope.addMultipleOptionQuestion = function () {
+            var flag = true;
             if ($scope.mulQue == "" || $scope.mulQue==undefined) {
                 alert(" Question field is required");
-            } else if ($scope.mulOptArry[0]==""||$scope.mulOptArry[0]==undefined) { //hard code , TBD later
-                alert(" Option field is required(1 At least)");
-            } else {
-                $scope.mulQueArry.push({
-                    mulQue: $scope.mulQue,
-                    mulOpt: $scope.mulOptArry
-                });
-                $scope.mulQue = "";
-                $scope.mulOptArry = [];
+            } else{
+                for (var i = 0; i < $scope.mulOptArry.length; i++) {
+                    if ($scope.mulOptArry[i] == "" || $scope.mulOptArry[i] == undefined) 
+                        { 
+                        alert(" Option field is required(1 At least)");
+                        flag = false;
+                        }               
+                }
+                if (flag) {
+                    $scope.mulQueArry.push({
+                        mulQue: $scope.mulQue,
+                        mulOpt: $scope.mulOptArry
+                    });
+                    $scope.mulQue = "";
+                    $scope.mulOptArry = [];
+                }
+               
             }
            
         }//  end of multiple choice section 
@@ -97,32 +107,36 @@
 
         $scope.save = function () {
             if (!$scope.surveyName || $scope.surveyName.length < 1) {
+                alert("Survey Name Required")
+            } else {
+                //new survey object
+                var survey = new Surveys({
+                    name: $scope.surveyName,
+                    category: $scope.category,           
+                    modified: false,
+                    username: $scope.username,
+                    description: $scope.description,                   
+                    expired: false,
+                    twoOption: $scope.twOptArry,
+                    multipleChoice: $scope.mulQueArry,
+                    shortAnswer: $scope.shortAnswerArry
+                });
 
+                //save into db
+                survey.$save(function () {                 
+                    $scope.surveys.push(survey);
+                    // clear inputs
+                    $scope.surveyName = '';
+                    $scope.description = '';
+                    $scope.category = '';
+                    $scope.shortAnswer = '';
+                    $scope.twOptArry = [];
+                    $scope.shortAnswerArry = [];
+                    $scope.mulQueArry = [];
+                    $scope.mulOptArry = [];
+                });
             }
-            //new survey object
-            var survey = new Surveys({
-                name: $scope.surveyName,
-                category: $scope.category,
-                completed: false,
-                modified:false,
-                username: $scope.username,
-                description: $scope.description,
-                twoOption: $scope.twOptArry,
-                multipleChoice: $scope.mulQueArry,
-                shortAnswer: $scope.shortAnswerArry
-            });
-
-            //save into db
-            survey.$save(function () {
-                $scope.surveys.push(survey);
-                // clear inputs
-                $scope.surveyName = '';
-                $scope.shortAnswer = '';
-                $scope.twOptArry = [];
-                $scope.shortAnswerArry = [];
-                $scope.mulQueArry = [];
-                $scope.mulOptArry = [];
-            });
+          
         };
 
 
@@ -151,7 +165,7 @@
             var count = 0;
             angular.forEach($scope.surveys, function (survey) {
                 if ($scope.username == survey.username) {
-                    count += survey.completed ? 0 : 1;
+                    count += survey.expired ? 0 : 1;
                 }
             });
             return count;

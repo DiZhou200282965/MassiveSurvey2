@@ -8,11 +8,11 @@ var Schema = mongoose.Schema;
 var SurveySchema = new Schema(
     {
         name: String,
-        category: String,
-        completed: Boolean,
+        category: String,      
         modified:Boolean,
         username: String,
-        description: String,
+        description: String,     
+        expired: Boolean,
         twoOption:
         [{
             twOptionQue: String,

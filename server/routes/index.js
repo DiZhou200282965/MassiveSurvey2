@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
             res.end(err);
         }
         else
-        {
+        {                
              tempSurveys = surveys;
             res.render('index', {
                 title: 'Massive Survey',
