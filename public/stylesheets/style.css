@@ -192,7 +192,8 @@ h1, h2, h3 {
   border-color: #DDD;
 }
 
-a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
+/*a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover*/
+div.list-group-item:focus, div.list-group-item:hover, button.list-group-item:focus, button.list-group-item:hover {
     background-color: #1C7592;
     vertical-align: middle;
     -webkit-transform: translateZ(0);
@@ -204,12 +205,18 @@ a.list-group-item:focus, a.list-group-item:hover, button.list-group-item:focus, 
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
-
 .list-group-item-heading {
   font-weight: bold;  
 }
-a.list-group-item .list-group-item-heading, button.list-group-item .list-group-item-heading {
+/*a.list-group-item .list-group-item-heading, button.list-group-item .list-group-item-heading*/
+div.list-group-item>a:hover {
+  text-decoration: none;
+}
+div.list-group-item>a .list-group-item-heading, button.list-group-item, .list-group-item-heading {
   color: #528494;
+}
+.list-group-item-text {
+  color: #067093;
 }
 
 .hover-change {
@@ -238,4 +245,9 @@ a.list-group-item .list-group-item-heading, button.list-group-item .list-group-i
 }
 .add-top-padding{
   padding-top: 20px;
+}
+
+/* expired surveys*/
+.custom-expired{
+  
 }

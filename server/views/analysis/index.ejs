@@ -4,8 +4,8 @@
     <h1>Analysis for Your Surveys</h1><br />
         <div class="list-group row">
             <% for (var i = 0; i < surveys.length; i++) { %>
-            <div class="col-md-8 col-md-offset-2 hover-change">
-                <a href="/analysis/<%= surveys[i]._id %>" title="See Analysis" class="list-group-item">
+            <div class="col-md-8 col-md-offset-2 hover-change list-group-item">
+                <a href="/analysis/<%= surveys[i]._id %>" title="See Analysis">
                     <h4 class="list-group-item-heading heading-change">
                         <div class="text-center">
                             <span><%= surveys[i].name %></span> <br />
